@@ -1,5 +1,7 @@
 # firebase-example
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/korosuke613/icon-generate-support-service.svg)](https://greenkeeper.io/)
+
 > Hello World Firebase
 
 ## Build Setup
