@@ -7,17 +7,17 @@
         <v-text-field
           v-model="text1"
           :rules="[required, limit_length]"
-          label="requires input and has a limited number of characters"
+          label="Label"
           counter="10"
         />
         <v-text-field
           v-model="text2"
           :rules="[required]"
-          label="requires input"
+          label="Message"
         />
         <v-text-field
           v-model="text3"
-          label="without any restrictions"
+          label="Color"
         />
       </v-form>
     </v-card-text>
