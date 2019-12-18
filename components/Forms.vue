@@ -50,12 +50,11 @@ export default {
     return {
       iconUrl: new IconUrl('Label', 'Message', 'Color'),
       success: true, // 送信が成功したかどうかのフラグ
-      url: '',
       required: value => !!value || 'Please be sure to input.' // 入力必須の制約
     }
   },
   computed: {
-    ...mapGetters('iconInfo', ['label', 'message', 'color'])
+    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url'])
   },
   created () {
     this.generateIconUrl()
@@ -63,7 +62,7 @@ export default {
   methods: {
     generateIconUrl () {
       this.iconUrl.setParam(this.label, this.message, this.color)
-      this.url = this.iconUrl.getUrl()
+      this.setUrl(this.iconUrl.getUrl())
     },
     submit () {
       if (this.$refs.generate_icon_url_form.validate()) {
@@ -75,7 +74,7 @@ export default {
         this.success = false
       }
     },
-    ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor'])
+    ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor', 'setUrl'])
   }
 }
 </script>
