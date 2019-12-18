@@ -7,25 +7,29 @@
         <v-divider />
         <v-form ref="generate_icon_url_form">
           <v-text-field
+            @input="setLabel"
             v-model="label"
             label="Label"
           />
           <v-text-field
             v-model="message"
             :rules="[required]"
+            @input="setMessage"
             label="Message"
           />
           <v-text-field
             v-model="color"
+            @input="setColor"
             label="Color"
           />
         </v-form>
       </v-card-text>
       <v-card-actions>
-        <v-btn v-on:click="submit" text>
+        <v-btn v-on:click="submit">
           Generate
         </v-btn>
-        <span v-if="success">Sucess send！</span>
+        <span v-if="success" />
+        <span v-else> Invalid input </span>
       </v-card-actions>
     </v-card>
     <v-card>
@@ -37,19 +41,21 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import IconUrl from '~/components/IconUrl.js'
 
 export default {
   data () {
     return {
       iconUrl: new IconUrl('Label', 'Message', 'Color'),
-      label: 'label',
-      message: 'message',
-      color: 'red',
-      success: false, // 送信が成功したかどうかのフラグ
+      success: true, // 送信が成功したかどうかのフラグ
       url: '',
       required: value => !!value || 'Please be sure to input.' // 入力必須の制約
     }
+  },
+  computed: {
+    ...mapGetters('iconInfo', ['label', 'message', 'color'])
   },
   created () {
     this.generateIconUrl()
@@ -68,7 +74,8 @@ export default {
       } else {
         this.success = false
       }
-    }
+    },
+    ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor'])
   }
 }
 </script>
