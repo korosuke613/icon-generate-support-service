@@ -2,14 +2,17 @@ import {
   SET_LABEL,
   SET_MESSAGE,
   SET_COLOR,
-  SET_URL
+  SET_URL,
+  SET_LOGS
 } from './mutationType.js'
 
 export const state = () => ({
   label: 'label',
   message: 'message',
   color: 'red',
-  url: 'https://img.shields.io/static/v1?label=label&message=message&color=red'
+  url: 'https://img.shields.io/static/v1?label=label&message=message&color=red',
+  logs: [],
+  logCount: 0
 })
 
 export const mutations = {
@@ -24,6 +27,10 @@ export const mutations = {
   },
   [SET_URL] (state, url) {
     state.url = url
+    state.logs.push(url)
+  },
+  [SET_LOGS] (state, logs) {
+    state.logs = logs
   }
 }
 
