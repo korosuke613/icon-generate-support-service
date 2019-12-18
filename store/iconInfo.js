@@ -61,5 +61,8 @@ export const getters = {
   },
   url (state) {
     return state.url
+  },
+  logs (state) {
+    return state.logs
   }
 }

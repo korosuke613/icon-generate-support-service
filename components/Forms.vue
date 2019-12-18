@@ -44,6 +44,7 @@
 import { mapActions, mapGetters } from 'vuex'
 
 import IconUrl from '~/components/IconUrl.js'
+import { db } from '~/plugins/firebase.js'
 
 export default {
   data () {
@@ -64,9 +65,18 @@ export default {
       this.iconUrl.setParam(this.label, this.message, this.color)
       this.setUrl(this.iconUrl.getUrl())
     },
+    uploadUrl () {
+      const hash = this.iconUrl.getHash()
+      const docRef = db.collection('icon_cache').doc(hash)
+      docRef.set({
+        'url': this.url,
+        'base64': 'aaaa'
+      })
+    },
     submit () {
       if (this.$refs.generate_icon_url_form.validate()) {
         this.generateIconUrl()
+        this.uploadUrl()
         // すべてのバリデーションが通過したときのみ
         // if文の中に入る
         this.success = true
