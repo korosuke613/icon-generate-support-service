@@ -1,5 +1,5 @@
 {
-    "name": "firebase-example",
+    "name": "icon-generate-support-service",
     "dockerComposeFile": "docker-compose.yml",
     "extensions": [
         "formulahendry.terminal",

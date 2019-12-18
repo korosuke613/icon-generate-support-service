@@ -1,7 +1,7 @@
 {
-  "name": "firebase-example",
+  "name": "icon-generate-support-service",
   "version": "1.0.0",
-  "description": "Hello World Firebase",
+  "description": "icon generate support service",
   "author": "Futa Hirakoba",
   "private": true,
   "scripts": {
