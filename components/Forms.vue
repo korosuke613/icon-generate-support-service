@@ -1,31 +1,39 @@
 <template>
-  <v-card>
-    <v-card-title>Forms</v-card-title>
-    <v-card-text>
-      <v-img :src="url" />
-      <v-divider />
+  <div>
+    <v-card>
+      <v-card-title>Forms</v-card-title>
+      <v-card-text>
+        <v-img :src="url" />
+        <v-divider />
+        <v-form ref="generate_icon_url_form">
+          <v-text-field
+            v-model="label"
+            label="Label"
+          />
+          <v-text-field
+            v-model="message"
+            :rules="[required]"
+            label="Message"
+          />
+          <v-text-field
+            v-model="color"
+            label="Color"
+          />
+        </v-form>
+      </v-card-text>
       <v-card-actions>
-        <v-btn v-on:click="generateIconUrl" text>
+        <v-btn v-on:click="submit" text>
           Generate
         </v-btn>
+        <span v-if="success">Sucess send！</span>
       </v-card-actions>
-      <v-form ref="test_form">
-        <v-text-field
-          v-model="label"
-          label="Label"
-        />
-        <v-text-field
-          v-model="message"
-          label="Message"
-        />
-        <v-text-field
-          v-model="color"
-          label="Color"
-        />
-      </v-form>
-      <p>URL: <a :href="url">{{ url }}</a></p>
-    </v-card-text>
-  </v-card>
+    </v-card>
+    <v-card>
+      <v-card-text>
+        <p>URL: <a :href="url">{{ url }}</a></p>
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <script>
@@ -39,7 +47,8 @@ export default {
       message: 'message',
       color: 'red',
       success: false, // 送信が成功したかどうかのフラグ
-      url: ''
+      url: '',
+      required: value => !!value || 'Please be sure to input.' // 入力必須の制約
     }
   },
   created () {
@@ -49,6 +58,16 @@ export default {
     generateIconUrl () {
       this.iconUrl.setParam(this.label, this.message, this.color)
       this.url = this.iconUrl.getUrl()
+    },
+    submit () {
+      if (this.$refs.generate_icon_url_form.validate()) {
+        this.generateIconUrl()
+        // すべてのバリデーションが通過したときのみ
+        // if文の中に入る
+        this.success = true
+      } else {
+        this.success = false
+      }
     }
   }
 }
