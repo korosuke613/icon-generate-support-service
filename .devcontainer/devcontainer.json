@@ -1,0 +1,13 @@
+{
+    "name": "firebase-example",
+    "dockerComposeFile": "docker-compose.yml",
+    "extensions": [
+        "formulahendry.terminal",
+        "octref.vetur",
+        "aeschli.vscode-css-formatter",
+        "dbaeumer.vscode-eslint"
+    ],
+    "service": "node",
+    "workspaceFolder": "/app",
+    "shutdownAction": "stopCompose"
+}

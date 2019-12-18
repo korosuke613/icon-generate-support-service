@@ -1,0 +1,5 @@
+version: '2'
+
+syncs:
+  firebase_example_sync:
+    src: '..'

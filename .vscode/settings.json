@@ -1,0 +1,20 @@
+{
+    "editor.tabSize": 2,
+    "editor.tabCompletion": "on",
+    "eslint.validate": [
+        {
+            "language": "vue",
+            "autoFix": true
+        }
+    ],
+    "vetur.format.defaultFormatter.js": "none",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "[vue]": {
+        "editor.formatOnSave": false
+    },
+    "[js]": {
+        "editor.formatOnSave": false
+    },
+}
