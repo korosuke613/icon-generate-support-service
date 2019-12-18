@@ -1,4 +1,4 @@
-export class IconUrl {
+export default class IconUrl {
   constructor (label, message, color) {
     this.label = label
     this.message = message
@@ -12,5 +12,15 @@ export class IconUrl {
   getUrl () {
     const result = this.TEMPLATE_URL().replace('<LABEL>', this.label).replace('<MESSAGE>', this.message).replace('<COLOR>', this.color)
     return result
+  }
+
+  getHtmlTag () {
+    return `<img src="${this.getUrl()}" />`
+  }
+
+  setParam (label, message, color) {
+    this.label = label
+    this.message = message
+    this.color = color
   }
 }

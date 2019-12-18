@@ -2,57 +2,53 @@
   <v-card>
     <v-card-title>Forms</v-card-title>
     <v-card-text>
+      <v-img :src="url" />
+      <v-divider />
+      <v-card-actions>
+        <v-btn v-on:click="generateIconUrl" text>
+          Generate
+        </v-btn>
+      </v-card-actions>
       <v-form ref="test_form">
-        Textbox
         <v-text-field
-          v-model="text1"
-          :rules="[required, limit_length]"
+          v-model="label"
           label="Label"
-          counter="10"
         />
         <v-text-field
-          v-model="text2"
-          :rules="[required]"
+          v-model="message"
           label="Message"
         />
         <v-text-field
-          v-model="text3"
+          v-model="color"
           label="Color"
         />
       </v-form>
+      <p>URL: <a :href="url">{{ url }}</a></p>
     </v-card-text>
-    <v-divider />
-    <v-card-actions>
-      <v-btn v-on:click="submit" text>
-        Send
-      </v-btn>
-      <span v-if="success">Sucess send！</span>
-    </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import IconUrl from '~/components/IconUrl.js'
+
 export default {
   data () {
     return {
-      text1: '',
-      text2: '',
-      text3: '',
+      iconUrl: new IconUrl('Label', 'Message', 'Color'),
+      label: 'label',
+      message: 'message',
+      color: 'red',
       success: false, // 送信が成功したかどうかのフラグ
-      required: value => !!value || 'Please be sure to input.', // 入力必須の制約
-      limit_length: value => value.length <= 10 || 'Please enter within 10 characters.' // 文字数の制約
+      url: ''
     }
   },
+  created () {
+    this.generateIconUrl()
+  },
   methods: {
-    // 送信を試みるメソッド（「送信する」がクリックされたときに呼ばれる）
-    submit () {
-      if (this.$refs.test_form.validate()) {
-        // すべてのバリデーションが通過したときのみ
-        // if文の中に入る
-        this.success = true
-      } else {
-        this.success = false
-      }
+    generateIconUrl () {
+      this.iconUrl.setParam(this.label, this.message, this.color)
+      this.url = this.iconUrl.getUrl()
     }
   }
 }
