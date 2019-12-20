@@ -14,8 +14,8 @@ const fireStore = admin.firestore()
 export const uploadIcon = functions.https.onRequest(async (request, response) => {
   //response.send("Hello from Firebase!");
   let base64 = ''
-  let url = request.body.url
-  let hash = getHash(url)
+  const url = request.body.url
+  const hash = getHash(url)
 
   await image2base64(url) // you can also to use url
     .then(
