@@ -1,5 +1,5 @@
 // const path = require('path')
-const IconUrl = require('~/components/IconUrl').IconUrl
+const IconUrl = require('~/components/IconUrl').default
 
 describe('icon_url', () => {
   describe('load_version', () => {

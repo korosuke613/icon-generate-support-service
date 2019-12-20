@@ -3,23 +3,23 @@
     <v-card>
       <v-card-title>Forms</v-card-title>
       <v-card-text>
-        <v-img :src="url" />
+        <v-img id="img1" :src="url" />
         <v-divider />
         <v-form ref="generate_icon_url_form">
           <v-text-field
             @input="setLabel"
-            v-model="label"
+            value="label"
             label="Label"
           />
           <v-text-field
-            v-model="message"
             :rules="[required]"
             @input="setMessage"
+            value="message"
             label="Message"
           />
           <v-text-field
-            v-model="color"
             @input="setColor"
+            valuel="color"
             label="Color"
           />
         </v-form>
@@ -35,6 +35,7 @@
     <v-card>
       <v-card-text>
         <p>URL: <a :href="url">{{ url }}</a></p>
+        <p>Base64: <a :href="base64">{{ base64 }}</a></p>
       </v-card-text>
     </v-card>
   </div>
@@ -51,6 +52,7 @@ export default {
     return {
       iconUrl: new IconUrl('Label', 'Message', 'Color'),
       success: true, // 送信が成功したかどうかのフラグ
+      base64: '',
       required: value => !!value || 'Please be sure to input.' // 入力必須の制約
     }
   },
@@ -70,7 +72,7 @@ export default {
       const docRef = db.collection('icon_cache').doc(hash)
       docRef.set({
         'url': this.url,
-        'base64': 'aaaa'
+        'base64': this.base64
       })
     },
     submit () {
