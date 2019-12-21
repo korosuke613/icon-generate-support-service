@@ -75,10 +75,10 @@ export const actions = {
 
 export const getters = {
   label (state) {
-    return state.label
+    return decodeURI(state.label)
   },
   message (state) {
-    return state.message
+    return decodeURI(state.message)
   },
   color (state) {
     return state.color

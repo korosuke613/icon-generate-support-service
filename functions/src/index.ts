@@ -59,7 +59,7 @@ export const uploadIcon = functions.https.onRequest(async (request, response) =>
 
   const hash = getHash(url)
 
-  await image2base64(encodeURI(url)) // URLの日本語エスケープ含む
+  await image2base64(url) // URLの日本語エスケープ含む
     .then(
       (res: string) => {
         base64 = res
