@@ -1,9 +1,8 @@
 import firebase from 'firebase/app'
 import 'firebase/analytics'
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-}
+const serviceAccount = require('~/plugins/secret_key.json')
+
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp({ ...serviceAccount })
 firebase.analytics()

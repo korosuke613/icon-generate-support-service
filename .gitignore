@@ -94,3 +94,5 @@ sw.*
 .firebase/
 
 app_engin_key.json
+secret_key.json
+.bash_history
