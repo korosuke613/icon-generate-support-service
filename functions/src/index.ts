@@ -13,6 +13,10 @@ const fireStore = admin.firestore()
 
 export const getIcon = functions.https.onRequest(async (request, response) => {
   const url = request.body.url
+  if (url === undefined || !url.includes('https://img.shields.io/static/v1')) {
+    response.send("Invalid parameter: url")
+    return
+  }
   const hash = getHash(url)
 
   const docRef = fireStore.collection('icon_cache').doc(hash)
@@ -48,6 +52,11 @@ export const uploadIcon = functions.https.onRequest(async (request, response) =>
   //response.send("Hello from Firebase!");
   let base64 = ''
   const url = request.body.url
+  if (url === undefined || !url.includes('https://img.shields.io/static/v1')) {
+    response.send("Invalid parameter: url")
+    return
+  }
+
   const hash = getHash(url)
 
   await image2base64(url) // you can also to use url
