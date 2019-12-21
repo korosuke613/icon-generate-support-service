@@ -80,7 +80,7 @@ export default {
 
   data () {
     return {
-      iconUrl: new IconUrl('Label', 'Message', 'Color', 'Style', 'Logo'),
+      iconUrl: new IconUrl(),
       success: true, // 送信が成功したかどうかのフラグ
       // base64: DEFAULT_BASE64,
       isHitData: false,
@@ -108,7 +108,7 @@ export default {
   methods: {
     generateIconUrl () {
       // アイコンのURLを整形
-      this.iconUrl.setParam(this.label, this.message, this.color, this.style, this.logo)
+      this.iconUrl.setParam(this.label, this.message, this.color, this.style, this.logo, this.logo)
       const url = this.iconUrl.getUrl()
       this.setUrl(url)
       return url

@@ -1,11 +1,12 @@
 const crypto = require('crypto')
 
 export default class IconUrl {
-  constructor (label, message, color, style) {
-    this.label = label
-    this.message = message
-    this.color = color
-    this.style = style
+  constructor () {
+    this.label = 'label'
+    this.message = 'message'
+    this.color = 'green'
+    this.style = 'flat'
+    this.logo = 'none'
   }
 
   TEMPLATE_URL () {
@@ -13,8 +14,13 @@ export default class IconUrl {
   }
 
   getUrl () {
-    const result = this.TEMPLATE_URL().replace('<LABEL>', this.label).replace('<MESSAGE>', this.message)
+    let result = this.TEMPLATE_URL().replace('<LABEL>', this.label).replace('<MESSAGE>', this.message)
       .replace('<COLOR>', this.color).replace('<STYLE>', this.style)
+
+    if (this.logo !== 'none') {
+      const logoName = this.logo.replace(' ', '-').toLowerCase()
+      result = `${result}&logo=${logoName}`
+    }
     return result
   }
 
@@ -28,10 +34,11 @@ export default class IconUrl {
     return `<img src="${this.getUrl()}" />`
   }
 
-  setParam (label, message, color, style) {
+  setParam (label, message, color, style, logo) {
     this.label = label
     this.message = message
     this.color = color
     this.style = style
+    this.logo = logo
   }
 }
