@@ -6,13 +6,11 @@ services:
     volumes:
       - ~/.gitconfig:/root/.gitconfig
       - ~/Library/Caches/Yarn/v4:/usr/local/share/.cache/yarn/v4
-      - firebase_example_sync:/app
+      - ../:/app
+      - ./.bash_history:/root/.bash_history
     environment:
       SHELL: "/bin/bash"
       HOME: "/root"
     ports:
       - "3000:3000"
       - "9005:9005"  # firebase login port
-volumes:
-  firebase_example_sync:
-    external: true
