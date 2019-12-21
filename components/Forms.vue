@@ -49,7 +49,7 @@
         </v-form>
       </v-card-text>
       <v-card-actions>
-        <v-btn v-on:click="submit">
+        <v-btn v-on:click="submit" :to="param">
           Generate
         </v-btn>
         <span v-if="success" />
@@ -99,13 +99,21 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url', 'base64', 'style', 'logo'])
+    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url', 'base64', 'style', 'logo', 'param'])
   },
   created () {
+    this.setGetParams()
     this.generateIconUrl()
     console.log(this.logos)
   },
   methods: {
+    setGetParams () {
+      if (this.$nuxt.$route.query.la !== undefined) { this.setLabel(this.$nuxt.$route.query.la) }
+      if (this.$nuxt.$route.query.me !== undefined) { this.setMessage(this.$nuxt.$route.query.me) }
+      if (this.$nuxt.$route.query.co !== undefined) { this.setColor(this.$nuxt.$route.query.co) }
+      if (this.$nuxt.$route.query.st !== undefined) { this.setStyle(this.$nuxt.$route.query.st) }
+      if (this.$nuxt.$route.query.lo !== undefined) { this.setLogo(this.$nuxt.$route.query.lo) }
+    },
     generateIconUrl () {
       // アイコンのURLを整形
       this.iconUrl.setParam(this.label, this.message, this.color, this.style, this.logo, this.logo)
@@ -140,7 +148,7 @@ export default {
       if (this.$refs.generate_icon_url_form.validate()) {
         this.generateIconUrl() // アイコンURLを生成
         this.setBase64(await this.getIcon()) // データベースからbase64を取得
-        if (this.base64 === 'No such document' || this.base64 === undefined) { // データが無かった場合、データベースにbase64を登録する
+        if (this.base64 === 'No such document' || this.base64 === 'data:image/svg+xml;base64,' || this.base64 === undefined) { // データが無かった場合、データベースにbase64を登録する
           console.log(`Info: not index, get Icon`)
           this.isHitData = false
           this.uploadUrl() // base64を取得して登録

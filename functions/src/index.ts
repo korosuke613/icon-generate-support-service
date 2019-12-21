@@ -59,15 +59,10 @@ export const uploadIcon = functions.https.onRequest(async (request, response) =>
 
   const hash = getHash(url)
 
-  await image2base64(url) // you can also to use url
+  await image2base64(encodeURI(url)) // URLの日本語エスケープ含む
     .then(
       (res: string) => {
         base64 = res
-      }
-    )
-    .catch(
-      (error: string) => {
-        console.log(error); //Exepection error....
       }
     )
   console.log(`url = ${url}`);

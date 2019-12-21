@@ -97,5 +97,8 @@ export const getters = {
   },
   logo (state) {
     return state.logo
+  },
+  param (state) {
+    return `/?la=${state.label}&me=${state.message}&co=${state.color}&st=${state.style}&lo=${state.logo}`
   }
 }
