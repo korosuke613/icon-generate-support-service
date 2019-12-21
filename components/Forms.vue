@@ -24,6 +24,16 @@
             :value="color"
             label="Color"
           />
+          <v-col class="d-flex" cols="12" sm="6">
+            <v-select
+              :items="styles"
+              :value="style"
+              @input="setStyle"
+              filled
+              label="Styles"
+              dense
+            />
+          </v-col>
         </v-form>
       </v-card-text>
       <v-card-actions>
@@ -60,6 +70,7 @@ export default {
       success: true, // 送信が成功したかどうかのフラグ
       // base64: DEFAULT_BASE64,
       isHitData: false,
+      styles: ['plastic', 'flat', 'flat-square', 'for-the-badge', 'social'],
       required: value => !!value || 'Please be sure to input.', // 入力必須の制約
       color_required: (value) => {
         const pattern = /^([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
@@ -73,7 +84,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url', 'base64'])
+    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url', 'base64', 'style'])
   },
   created () {
     this.generateIconUrl()
@@ -127,7 +138,7 @@ export default {
         this.success = false
       }
     },
-    ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor', 'setUrl', 'setBase64'])
+    ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor', 'setUrl', 'setBase64', 'setStyle'])
   }
 }
 </script>
