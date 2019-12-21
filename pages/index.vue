@@ -23,6 +23,12 @@ export default {
   components: {
     Forms,
     Message
+  },
+  head () {
+    return {
+      title: 'AIKON',
+      titleTemplate: ''
+    }
   }
 }
 </script>
