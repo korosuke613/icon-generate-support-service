@@ -9,7 +9,7 @@ import {
 export const state = () => ({
   label: 'label',
   message: 'message',
-  color: 'red',
+  color: 'green',
   url: 'https://img.shields.io/static/v1?label=label&message=message&color=red',
   logs: [],
   logCount: 0

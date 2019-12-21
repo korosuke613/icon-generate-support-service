@@ -47,6 +47,9 @@
 </template>
 
 <script>
+/* eslint-disable no-unused-vars */
+import firebase from '~/plugins/firebase.js'
+
 export default {
   data () {
     return {

@@ -22,7 +22,7 @@ export const getIcon = functions.https.onRequest(async (request, response) => {
     if (!doc.exists) {
       console.log('No such document!');
     } else {
-      base64 = doc.data().base64
+      base64 = `data:image/svg+xml;base64,${doc.data().base64}`
     }
   })
     .catch((err: string) => {
