@@ -48,7 +48,6 @@
 
 <script>
 /* eslint-disable no-unused-vars */
-import firebase from '~/plugins/firebase.js'
 
 export default {
   data () {
@@ -78,6 +77,9 @@ export default {
       rightDrawer: false,
       title: 'AIKON'
     }
+  },
+  mounted () {
+    const firebase = require('~/plugins/firebase.js')
   }
 }
 </script>

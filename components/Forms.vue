@@ -1,69 +1,71 @@
 <template>
-  <div>
-    <v-card>
-      <v-card-title>Forms</v-card-title>
-      <v-card-text>
-        <a :href="rasterUrl">
-          <v-img id="img1" v-if="isHitData" :src="base64" />
-          <v-img id="img1" v-else :src="url" />
-        </a>
-        <v-divider />
-        <v-form ref="generate_icon_url_form">
-          <v-text-field
-            @input="setLabel"
-            :value="label"
-            label="Label"
-          />
-          <v-text-field
-            :rules="[required]"
-            @input="setMessage"
-            :value="message"
-            label="Message"
-          />
-          <v-text-field
-            :rules="[color_required]"
-            @input="setColor"
-            :value="color"
-            label="Color"
-          />
-          <v-row>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-select
-                :items="styles"
-                :value="style"
-                @input="setStyle"
-                filled
-                label="Styles"
-                dense
-              />
-            </v-col>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-autocomplete
-                @input="setLogo"
-                :value="logo"
-                :items="logos"
-                label="Simple Icon"
-                placeholder="Start typing to Search"
-                return-object
-              />
-            </v-col>
-          </v-row>
-        </v-form>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn v-on:click="submit" :to="param">
-          Generate
-        </v-btn>
-        <span v-if="success" />
-        <span v-else> Invalid input </span>
-      </v-card-actions>
-    </v-card>
-    <v-card>
-      <v-card-text>
-        <p>URL: <a :href="url">{{ url }}</a></p>
-      </v-card-text>
-    </v-card>
-  </div>
+  <no-ssr placeholder="Loading...">
+    <div>
+      <v-card>
+        <v-card-title>Forms</v-card-title>
+        <v-card-text>
+          <a :href="rasterUrl">
+            <v-img id="img1" v-if="isHitData" :src="base64" />
+            <v-img id="img1" v-else :src="url" />
+          </a>
+          <v-divider />
+          <v-form ref="generate_icon_url_form">
+            <v-text-field
+              @input="setLabel"
+              :value="label"
+              label="Label"
+            />
+            <v-text-field
+              :rules="[required]"
+              @input="setMessage"
+              :value="message"
+              label="Message"
+            />
+            <v-text-field
+              :rules="[color_required]"
+              @input="setColor"
+              :value="color"
+              label="Color"
+            />
+            <v-row>
+              <v-col class="d-flex" cols="12" sm="6">
+                <v-select
+                  :items="styles"
+                  :value="style"
+                  @input="setStyle"
+                  filled
+                  label="Styles"
+                  dense
+                />
+              </v-col>
+              <v-col class="d-flex" cols="12" sm="6">
+                <v-autocomplete
+                  @input="setLogo"
+                  :value="logo"
+                  :items="logos"
+                  label="Simple Icon"
+                  placeholder="Start typing to Search"
+                  return-object
+                />
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn v-on:click="submit" :to="param">
+            Generate
+          </v-btn>
+          <span v-if="success" />
+          <span v-else> Invalid input </span>
+        </v-card-actions>
+      </v-card>
+      <v-card>
+        <v-card-text>
+          <p>URL: <a :href="url">{{ url }}</a></p>
+        </v-card-text>
+      </v-card>
+    </div>
+  </no-ssr>
 </template>
 
 <script>
@@ -161,6 +163,49 @@ export default {
       }
     },
     ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor', 'setUrl', 'setBase64', 'setStyle', 'setLogo'])
+  },
+  head () {
+    return {
+      meta: [
+        {
+          property: 'og:site_name',
+          content: 'AIKON'
+        },
+        {
+          property: 'og:type',
+          content: 'website'
+        },
+        {
+          property: 'og:url',
+          content: 'https://aikon-eaf3a.web.app/'
+        },
+        {
+          property: 'og:title',
+          content: 'AIKON'
+        },
+        {
+          property: 'og:description',
+          content: 'アイコン生成する'
+        },
+        {
+          property: 'og:image',
+          content: this.url.replace('https://img.shields.io/', 'https://raster.shields.io/')
+            .replace('=message', `=${this.$nuxt.$route.query.me || 'message'}`)
+            .replace('=label', `=${this.$nuxt.$route.query.la || 'label'}`)
+            .replace('=color', `=${this.$nuxt.$route.query.co || 'green'}`)
+            .replace('=flat', `=${this.$nuxt.$route.query.st || 'flat'}`)
+            .replace('=none', `=${this.$nuxt.$route.query.lo || 'none'}`)
+        },
+        {
+          property: 'fb:app_id',
+          content: 'アプリID'
+        },
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image'
+        }
+      ]
+    }
   }
 }
 </script>
