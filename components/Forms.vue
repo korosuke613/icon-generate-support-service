@@ -1,5 +1,5 @@
 <template>
-  <no-ssr placeholder="Loading...">
+  <client-only placeholder="Loading...">
     <div>
       <v-card>
         <v-card-title>Forms</v-card-title>
@@ -65,7 +65,7 @@
         </v-card-text>
       </v-card>
     </div>
-  </no-ssr>
+  </client-only>
 </template>
 
 <script>
@@ -97,7 +97,8 @@ export default {
           isValid = true
         }
         return isValid || 'Invalid Color Code.'
-      }
+      },
+      ogpData: {}
     }
   },
   computed: {
@@ -106,6 +107,22 @@ export default {
   created () {
     this.setGetParams()
     this.generateIconUrl()
+  },
+  mounted () {
+    if (window.location.search === '') { return }
+    const variables = window.location.search.split('?')[1].split('&')
+    const obj = {}
+    variables.forEach(function (v, i) {
+      const variable = v.split('=')
+      obj[variable[0]] = Number(variable[1])
+    })
+    this.ogpData = {
+      me: obj.message,
+      la: obj.label,
+      co: obj.color,
+      st: obj.style,
+      lo: obj.logo
+    }
   },
   methods: {
     setGetParams () {
@@ -190,11 +207,11 @@ export default {
         {
           property: 'og:image',
           content: this.url.replace('https://img.shields.io/', 'https://raster.shields.io/')
-            .replace('=message', `=${this.$nuxt.$route.query.me || 'message'}`)
-            .replace('=label', `=${this.$nuxt.$route.query.la || 'label'}`)
-            .replace('=color', `=${this.$nuxt.$route.query.co || 'green'}`)
-            .replace('=flat', `=${this.$nuxt.$route.query.st || 'flat'}`)
-            .replace('=none', `=${this.$nuxt.$route.query.lo || 'none'}`)
+            .replace('=message', `=${this.ogpData.me || 'message'}`)
+            .replace('=label', `=${this.ogpData.la || 'label'}`)
+            .replace('=color', `=${this.ogpData.co || 'green'}`)
+            .replace('=flat', `=${this.ogpData.st || 'flat'}`)
+            .replace('=none', `=${this.ogpData.lo || 'none'}`)
         },
         {
           property: 'fb:app_id',
