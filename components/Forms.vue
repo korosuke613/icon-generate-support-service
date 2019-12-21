@@ -45,9 +45,11 @@
 import { mapActions, mapGetters } from 'vuex'
 
 import IconUrl from '~/components/IconUrl.js'
-import { db } from '~/plugins/firebase.js'
+const axios = require('axios').default
 
 export default {
+  /* eslint-disable no-console */
+
   data () {
     return {
       iconUrl: new IconUrl('Label', 'Message', 'Color'),
@@ -64,23 +66,44 @@ export default {
   },
   methods: {
     generateIconUrl () {
+      // アイコンのURLを整形
       this.iconUrl.setParam(this.label, this.message, this.color)
-      this.setUrl(this.iconUrl.getUrl())
+      const url = this.iconUrl.getUrl()
+      this.setUrl(url)
+      return url
     },
-    uploadUrl () {
-      const hash = this.iconUrl.getHash()
-      const docRef = db.collection('icon_cache').doc(hash)
-      docRef.set({
-        'url': this.url,
-        'base64': this.base64
-      })
+
+    async getIcon () {
+      try {
+        const response = await axios.post('/getIcon', {
+          'url': this.url
+        })
+        console.log(response)
+        return response.data
+      } catch (e) {
+        throw e
+      }
     },
-    submit () {
+
+    async uploadUrl () {
+      try {
+        const response = await axios.post('/uploadIcon', {
+          'url': this.url
+        })
+        console.log(response)
+        return response.data
+      } catch (e) {
+        throw e
+      }
+    },
+    async submit () {
       if (this.$refs.generate_icon_url_form.validate()) {
-        this.generateIconUrl()
-        this.uploadUrl()
-        // すべてのバリデーションが通過したときのみ
-        // if文の中に入る
+        this.generateIconUrl() // アイコンURLを生成
+        this.base64 = await this.getIcon() // データベースからbase64を取得
+        if (this.base64 === 'No such document' || this.base64 === undefined) { // データが無かった場合、データベースにbase64を登録する
+          console.log(`Info: not index, get Icon`)
+          await this.uploadUrl() // base64を取得して登録
+        }
         this.success = true
       } else {
         this.success = false

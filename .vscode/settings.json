@@ -17,4 +17,7 @@
     "[js]": {
         "editor.formatOnSave": false
     },
+    "[ts]": {
+        "editor.formatOnSave": false
+    },
 }

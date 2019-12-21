@@ -11,6 +11,39 @@ const fireStore = admin.firestore()
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
 
+export const getIcon = functions.https.onRequest(async (request, response) => {
+  const url = request.body.url
+  const hash = getHash(url)
+
+  const docRef = fireStore.collection('icon_cache').doc(hash)
+
+  let base64: string = 'No such document'
+  await docRef.get().then((doc: any) => {
+    if (!doc.exists) {
+      console.log('No such document!');
+    } else {
+      base64 = doc.data().base64
+    }
+  })
+    .catch((err: string) => {
+      if (err !== 'No such document!') {
+        console.log('Error getting document', err);
+      }
+    });
+  const log = {
+    'url': url,
+    'hash': hash,
+    'base64': base64
+  }
+  console.log(log)
+
+  // console.log(`url = ${url}`);
+  // console.log(`hash = ${hash}`);
+  // console.log(`base64 = ${base64.slice(0, 17)}`);
+
+  response.send(base64)
+});
+
 export const uploadIcon = functions.https.onRequest(async (request, response) => {
   //response.send("Hello from Firebase!");
   let base64 = ''
@@ -27,16 +60,16 @@ export const uploadIcon = functions.https.onRequest(async (request, response) =>
       (error: string) => {
         console.log(error); //Exepection error....
       }
-  )
-  //console.log(`url = ${url}`);
-  //console.log(`hash = ${hash}`);
-  //console.log(`base64 = ${base64.slice(10)}`);
+    )
+  console.log(`url = ${url}`);
+  console.log(`hash = ${hash}`);
+  console.log(`base64 = ${base64.slice(10)}`);
 
   const docRef = fireStore.collection('icon_cache').doc(hash)
   docRef.set({
     'url': url,
     'base64': base64
-  }) 
+  })
   response.send('OK!')
 });
 
