@@ -3,8 +3,10 @@
     <v-card>
       <v-card-title>Forms</v-card-title>
       <v-card-text>
-        <v-img id="img1" v-if="isHitData" :src="base64" />
-        <v-img id="img1" v-else :src="url" />
+        <a :href="rasterUrl">
+          <v-img id="img1" v-if="isHitData" :src="base64" />
+          <v-img id="img1" v-else :src="url" />
+        </a>
         <v-divider />
         <v-form ref="generate_icon_url_form">
           <v-text-field
@@ -72,8 +74,6 @@ const axios = require('axios').default
 
 const simpleIcons = require('~/components/simple_icons.json').icons
 const simpleIconsOnlyName = ['none'].concat(simpleIcons.map(icon => icon.title))
-// ページを開いた際に表示されるアイコン
-// const DEFAULT_BASE64 = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iOTYiIGhlaWdodD0iMjAiPjxsaW5lYXJHcmFkaWVudCBpZD0iYiIgeDI9IjAiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNiYmIiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3Atb3BhY2l0eT0iLjEiLz48L2xpbmVhckdyYWRpZW50PjxjbGlwUGF0aCBpZD0iYSI+PHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIvPjwvY2xpcFBhdGg+PGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj48cGF0aCBmaWxsPSIjNTU1IiBkPSJNMCAwaDM3djIwSDB6Ii8+PHBhdGggZmlsbD0iIzk3Y2EwMCIgZD0iTTM3IDBoNTl2MjBIMzd6Ii8+PHBhdGggZmlsbD0idXJsKCNiKSIgZD0iTTAgMGg5NnYyMEgweiIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMsVmVyZGFuYSxHZW5ldmEsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMTAiPiA8dGV4dCB4PSIxOTUiIHk9IjE1MCIgZmlsbD0iIzAxMDEwMSIgZmlsbC1vcGFjaXR5PSIuMyIgdHJhbnNmb3JtPSJzY2FsZSguMSkiIHRleHRMZW5ndGg9IjI3MCI+bGFiZWw8L3RleHQ+PHRleHQgeD0iMTk1IiB5PSIxNDAiIHRyYW5zZm9ybT0ic2NhbGUoLjEpIiB0ZXh0TGVuZ3RoPSIyNzAiPmxhYmVsPC90ZXh0Pjx0ZXh0IHg9IjY1NSIgeT0iMTUwIiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgdGV4dExlbmd0aD0iNDkwIj5tZXNzYWdlPC90ZXh0Pjx0ZXh0IHg9IjY1NSIgeT0iMTQwIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgdGV4dExlbmd0aD0iNDkwIj5tZXNzYWdlPC90ZXh0PjwvZz4gPC9zdmc+'
 
 export default {
   /* eslint-disable no-console */
@@ -99,7 +99,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url', 'base64', 'style', 'logo', 'param'])
+    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url', 'base64', 'style', 'logo', 'param', 'rasterUrl'])
   },
   created () {
     this.setGetParams()

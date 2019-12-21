@@ -100,5 +100,8 @@ export const getters = {
   },
   param (state) {
     return `/?la=${state.label}&me=${state.message}&co=${state.color}&st=${state.style}&lo=${state.logo}`
+  },
+  rasterUrl (state) {
+    return state.url.replace('https://img.shields.io', 'https://raster.shields.io')
   }
 }
