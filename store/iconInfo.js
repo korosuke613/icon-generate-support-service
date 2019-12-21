@@ -84,7 +84,7 @@ export const getters = {
     return state.color
   },
   url (state) {
-    return state.url
+    return encodeURI(state.url)
   },
   style (state) {
     return state.style
