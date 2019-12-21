@@ -41,10 +41,6 @@ export const getIcon = functions.https.onRequest(async (request, response) => {
   }
   console.log(log)
 
-  // console.log(`url = ${url}`);
-  // console.log(`hash = ${hash}`);
-  // console.log(`base64 = ${base64.slice(0, 17)}`);
-
   response.send(base64)
 });
 

@@ -104,7 +104,6 @@ export default {
   created () {
     this.setGetParams()
     this.generateIconUrl()
-    console.log(this.logos)
   },
   methods: {
     setGetParams () {
@@ -127,7 +126,6 @@ export default {
         const response = await axios.post('/getIcon', {
           'url': this.url
         })
-        console.log(response)
         return response.data
       } catch (e) {
         throw e
