@@ -92,3 +92,5 @@ sw.*
 ### Firebase ###
 **/.firebaserc
 .firebase/
+
+app_engin_key.json
