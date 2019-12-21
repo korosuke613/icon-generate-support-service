@@ -66,11 +66,11 @@ export default {
 
   data () {
     return {
-      iconUrl: new IconUrl('Label', 'Message', 'Color'),
+      iconUrl: new IconUrl('Label', 'Message', 'Color', 'Style'),
       success: true, // 送信が成功したかどうかのフラグ
       // base64: DEFAULT_BASE64,
       isHitData: false,
-      styles: ['plastic', 'flat', 'flat-square', 'for-the-badge', 'social'],
+      styles: ['flat', 'flat-square', 'plastic', 'for-the-badge', 'social'],
       required: value => !!value || 'Please be sure to input.', // 入力必須の制約
       color_required: (value) => {
         const pattern = /^([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
@@ -92,7 +92,7 @@ export default {
   methods: {
     generateIconUrl () {
       // アイコンのURLを整形
-      this.iconUrl.setParam(this.label, this.message, this.color)
+      this.iconUrl.setParam(this.label, this.message, this.color, this.style)
       const url = this.iconUrl.getUrl()
       this.setUrl(url)
       return url
