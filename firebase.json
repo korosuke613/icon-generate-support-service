@@ -18,6 +18,10 @@
       {
         "source": "/getIcon",
         "function": "getIcon"
+      },
+      {
+        "source": "/share",
+        "function": "shareServer"
       }
     ]
   },

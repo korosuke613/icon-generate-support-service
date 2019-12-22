@@ -78,3 +78,7 @@ const getHash = (url: string) => {
   shasum.update(url) // ここの引数にハッシュを計算したい文字列を渡す
   return shasum.digest('hex')
 }
+
+if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'shareServer') {
+  exports.shareServer = require('./shareServer');
+}
