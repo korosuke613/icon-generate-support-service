@@ -76,6 +76,8 @@ const axios = require('axios').default
 
 const simpleIcons = require('~/components/simple_icons.json').icons
 const simpleIconsOnlyName = ['none'].concat(simpleIcons.map(icon => icon.title))
+const colorNames = require('~/components/cssColorNames.json').colors
+const colorNamesWithStatus = ['success', 'important', 'critical', 'informational', 'inactive'].concat(colorNames)
 
 export default {
   /* eslint-disable no-console */
@@ -91,7 +93,7 @@ export default {
       required: value => !!value || 'Please be sure to input.', // 入力必須の制約
       color_required: (value) => {
         const pattern = /^([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
-        const reservedColors = ['brightgreen', 'green', 'yellowgreen', 'yellow', 'orange', 'red', 'blue', 'lightgrey', 'success', 'important', 'critical', 'informational', 'inactive', 'blueviolet']
+        const reservedColors = colorNamesWithStatus
         let isValid = false
         if (reservedColors.includes(value) || pattern.test(value)) {
           isValid = true
