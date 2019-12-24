@@ -4,7 +4,10 @@
       <v-card>
         <v-card-title>Forms</v-card-title>
         <v-card-text>
-          <preview />
+          <a :href="rasterUrl">
+            <v-img id="img1" v-if="isHitData" :src="base64" />
+            <v-img id="img1" v-else :src="url" />
+          </a>
           <v-divider />
           <v-form ref="generate_icon_url_form">
             <v-text-field
@@ -68,21 +71,19 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Result from '~/components/Result.vue'
-import Preview from '~/components/Preview.vue'
 
 import IconUrl from '~/components/IconUrl.js'
 const axios = require('axios').default
 
-const simpleIcons = require('~/components/simple_icons.json').icons
+const simpleIcons = require('~/assets/simple_icons.json').icons
 const simpleIconsOnlyName = ['none'].concat(simpleIcons.map(icon => icon.title))
-const colorNames = require('~/components/cssColorNames.json').colors
+const colorNames = require('~/assets/cssColorNames.json').colors
 const colorNamesWithStatus = ['none', 'success', 'important', 'critical', 'informational', 'inactive'].concat(colorNames)
 
 export default {
   /* eslint-disable no-console */
   components: {
-    Result,
-    Preview
+    Result
   },
   data () {
     return {
