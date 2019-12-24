@@ -48,6 +48,14 @@
                   return-object
                 />
               </v-col>
+              <v-col class="d-flex" cols="12" sm="6">
+                <v-text-field
+                  :rules="[color_required]"
+                  @input="setLogoColor"
+                  :value="logoColor"
+                  label="Simple Icon Color"
+                />
+              </v-col>
             </v-row>
           </v-form>
         </v-card-text>
@@ -77,7 +85,7 @@ const axios = require('axios').default
 const simpleIcons = require('~/components/simple_icons.json').icons
 const simpleIconsOnlyName = ['none'].concat(simpleIcons.map(icon => icon.title))
 const colorNames = require('~/components/cssColorNames.json').colors
-const colorNamesWithStatus = ['success', 'important', 'critical', 'informational', 'inactive'].concat(colorNames)
+const colorNamesWithStatus = ['none', 'success', 'important', 'critical', 'informational', 'inactive'].concat(colorNames)
 
 export default {
   /* eslint-disable no-console */
@@ -104,7 +112,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url', 'base64', 'style', 'logo', 'param', 'rasterUrl'])
+    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url', 'base64', 'style', 'logo', 'logoColor', 'param', 'rasterUrl'])
   },
   created () {
     this.setGetParams()
@@ -123,7 +131,8 @@ export default {
       la: obj.label,
       co: obj.color,
       st: obj.style,
-      lo: obj.logo
+      lo: obj.logo,
+      lc: obj.logoColor
     }
   },
   methods: {
@@ -133,10 +142,11 @@ export default {
       if (this.$nuxt.$route.query.co !== undefined) { this.setColor(this.$nuxt.$route.query.co) }
       if (this.$nuxt.$route.query.st !== undefined) { this.setStyle(this.$nuxt.$route.query.st) }
       if (this.$nuxt.$route.query.lo !== undefined) { this.setLogo(this.$nuxt.$route.query.lo) }
+      if (this.$nuxt.$route.query.lc !== undefined) { this.setLogoColor(this.$nuxt.$route.query.lc) }
     },
     generateIconUrl () {
       // アイコンのURLを整形
-      this.iconUrl.setParam(this.label, this.message, this.color, this.style, this.logo, this.logo)
+      this.iconUrl.setParam(this.label, this.message, this.color, this.style, this.logo, this.logoColor)
       const url = this.iconUrl.getUrl()
       this.setUrl(url)
       return url
@@ -181,7 +191,7 @@ export default {
         this.success = false
       }
     },
-    ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor', 'setUrl', 'setBase64', 'setStyle', 'setLogo'])
+    ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor', 'setUrl', 'setBase64', 'setStyle', 'setLogo', 'setLogoColor'])
   },
   head () {
     return {

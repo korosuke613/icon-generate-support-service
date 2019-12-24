@@ -21,6 +21,9 @@ export default class IconUrl {
       const logoName = this.logo.replace(' ', '-').toLowerCase()
       result = `${result}&logo=${logoName}`
     }
+    if (this.logoColor !== 'none') {
+      result = `${result}&logoColor=${this.logoColor}`
+    }
     return result
   }
 
@@ -34,11 +37,12 @@ export default class IconUrl {
     return `<img src="${this.getUrl()}" />`
   }
 
-  setParam (label, message, color, style, logo) {
+  setParam (label, message, color, style, logo, logoColor) {
     this.label = label
     this.message = message
     this.color = color
     this.style = style
     this.logo = logo
+    this.logoColor = logoColor
   }
 }
