@@ -4,10 +4,7 @@
       <v-card>
         <v-card-title>Forms</v-card-title>
         <v-card-text>
-          <a :href="rasterUrl">
-            <v-img id="img1" v-if="isHitData" :src="base64" />
-            <v-img id="img1" v-else :src="url" />
-          </a>
+          <preview />
           <v-divider />
           <v-form ref="generate_icon_url_form">
             <v-text-field
@@ -63,17 +60,15 @@
           <span v-else> Invalid input </span>
         </v-card-actions>
       </v-card>
-      <v-card>
-        <v-card-text>
-          <p>URL: <a :href="url">{{ url }}</a></p>
-        </v-card-text>
-      </v-card>
+      <result />
     </div>
   </client-only>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Result from '~/components/Result.vue'
+import Preview from '~/components/Preview.vue'
 
 import IconUrl from '~/components/IconUrl.js'
 const axios = require('axios').default
@@ -85,7 +80,10 @@ const colorNamesWithStatus = ['none', 'success', 'important', 'critical', 'infor
 
 export default {
   /* eslint-disable no-console */
-
+  components: {
+    Result,
+    Preview
+  },
   data () {
     return {
       iconUrl: new IconUrl(),
