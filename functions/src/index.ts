@@ -79,6 +79,6 @@ const getHash = (url: string) => {
   return shasum.digest('hex')
 }
 
-if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'shareServer') {
-  exports.shareServer = require('./shareServer');
+if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'getShareOgp') {
+  exports.getShareOgp = require('./getShareOgp');
 }

@@ -21,7 +21,7 @@
       },
       {
         "source": "/share",
-        "function": "shareServer"
+        "function": "getShareOgp"
       }
     ]
   },
