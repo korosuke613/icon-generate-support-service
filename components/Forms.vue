@@ -27,17 +27,13 @@
               :value="color"
               label="Color"
             />
+            <v-select
+              :items="styles"
+              :value="style"
+              @input="setStyle"
+              label="Styles"
+            />
             <v-row>
-              <v-col class="d-flex" cols="12" sm="6">
-                <v-select
-                  :items="styles"
-                  :value="style"
-                  @input="setStyle"
-                  filled
-                  label="Styles"
-                  dense
-                />
-              </v-col>
               <v-col class="d-flex" cols="12" sm="6">
                 <v-autocomplete
                   @input="setLogo"
