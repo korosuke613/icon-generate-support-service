@@ -1,5 +1,4 @@
 const functions = require('firebase-functions')
-const svg2img = require('svg2img');
 const fs = require('fs');
 const image2base64 = require('image-to-base64');
 const sharp = require("sharp")
@@ -16,17 +15,17 @@ module.exports = functions.https.onRequest(async (request: any, response: any) =
   }
 
   const url = getTransUrl(params)
-  await getSvg(url, '1.png')
+  await getSvg(url, 'new-file.png')
   response.send(url)
 });
 
-const gousei = async () => {
+const gousei = async (fileName: string) => {
   // Canvas.Image() メソッドでImg要素を作り、
   // srcに受け取ったファイルのパスをセットする
   const baseImg = new Canvas.Image();
   baseImg.src = await fs.readFileSync('dummy.png');
   const overImg = new Canvas.Image();
-  overImg.src = await fs.readFileSync('new-file.png');
+  overImg.src = await fs.readFileSync(fileName);
 
   // Canvasを初期化する
   const canvas = Canvas.createCanvas(baseImg.width, baseImg.height);
@@ -47,14 +46,15 @@ const getSvg = async (url: string, fileName: string) => {
       (res: string) => {
         svgBase64 = res
       }
-    )
+  )
+  console.log(svgBase64)
 
   await sharp(Buffer.from(svgBase64, 'base64'), { density: 2400 })
     .resize({ width: 400, fit: "inside" })
     .png()
-    .toFile("new-file.png")
+    .toFile(fileName)
 
-  gousei()
+  await gousei(fileName)
 }
 
 const getTransUrl = (params: any) => {
