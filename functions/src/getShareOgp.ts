@@ -3,6 +3,7 @@ const fs = require('fs');
 const image2base64 = require('image-to-base64');
 const sharp = require("sharp")
 const Canvas = require('canvas'); // node-canvasをrequireする
+const puppeteer = require('puppeteer');
 
 module.exports = functions.https.onRequest(async (request: any, response: any) => {
   const params = {
@@ -15,7 +16,7 @@ module.exports = functions.https.onRequest(async (request: any, response: any) =
   }
 
   const url = getTransUrl(params)
-  await getSvg(url, 'new-file.png')
+  await getSvg(url, 'icon.png')
   response.send(url)
 });
 
@@ -40,20 +41,24 @@ const gousei = async (fileName: string) => {
 }
 
 const getSvg = async (url: string, fileName: string) => {
-  let svgBase64 = ''
-  await image2base64(url) // URLの日本語エスケープ含む
-    .then(
-      (res: string) => {
-        svgBase64 = res
-      }
-  )
-  console.log(svgBase64)
+ await (async () => {
+  const browser = await puppeteer.launch({args: ['--no-sandbox']});
+  const page = await browser.newPage();
+  await page.goto(url);
+  await page.setViewport({width: 300, height: 300, deviceScaleFactor:2.5});
 
-  await sharp(Buffer.from(svgBase64, 'base64'), { density: 2400 })
-    .resize({ width: 400, fit: "inside" })
-    .png()
-    .toFile(fileName)
+  const clip = await page.evaluate((s: any) => {
+    const el = document.querySelector(s)
 
+    // エレメントの高さと位置を取得
+    const { width, height, top: y, left: x } = el.getBoundingClientRect()
+    return { width, height, x, y }
+  }, 'svg')
+
+  await page.screenshot({ clip, path: fileName })
+  await browser.close();
+})();
+  
   await gousei(fileName)
 }
 
