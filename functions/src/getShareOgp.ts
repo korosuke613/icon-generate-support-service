@@ -1,7 +1,9 @@
 const functions = require('firebase-functions')
+const admin = require('firebase-admin')
+import * as crypto from "crypto";
+
+const storage = admin.storage()
 const fs = require('fs');
-const image2base64 = require('image-to-base64');
-const sharp = require("sharp")
 const Canvas = require('canvas'); // node-canvasをrequireする
 const puppeteer = require('puppeteer');
 const os = require('os');
@@ -21,15 +23,36 @@ module.exports = functions.runWith({memory: '1GB'}).https.onRequest(async (reque
   const filePath = path.join(tmpdir, 'icon.png')
 
   const url = getTransUrl(params)
-  const fileName = await getSvg(url, filePath)
-  let base64 = ''
-  await fs.readFile(fileName, 'base64', function (err: any, data: any) {
-    if (err) throw err
-    console.log(data)
-    base64 = data
-  });
+  const tempLocalFile = await getSvg(url, filePath)
+  
+  const metadata = {
+    cacheControl: 'public,max-age=31536000', // 1年キャッシュする
+    contentType: 'image/png'
+  }
+  const shasum = crypto.createHash('sha1')
+  shasum.update(url) // ここの引数にハッシュを計算したい文字列を渡す
+  const uploadName = shasum.digest('hex')
 
-  response.send(base64)
+  console.log(`upload: ${tempLocalFile}`)
+  await storage.bucket().upload(tempLocalFile, {
+    destination: `cards/${uploadName}.png`,
+    metadata
+  })
+  let imageUrl = ''
+
+  console.log('download')
+
+  await storage.bucket().file(`cards/${uploadName}.png`).getSignedUrl({
+    action: 'read',
+    expires: '03-17-2025'
+  },  (err: any, signedUrl: any) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+      imageUrl = signedUrl
+      response.send(imageUrl)
+  })
 });
 
 const gousei = async (fileName: string) => {

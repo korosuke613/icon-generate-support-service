@@ -1,7 +1,11 @@
 import * as functions from 'firebase-functions';
 const admin = require('firebase-admin')
-admin.initializeApp(functions.config().firebase)
+import serviceAccount from './app_engin_key'
 
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: 'gs://aikon-eaf3a.appspot.com/'
+});
 const image2base64 = require('image-to-base64');
 const crypto = require('crypto')
 

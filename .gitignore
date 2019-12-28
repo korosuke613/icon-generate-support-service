@@ -93,6 +93,6 @@ sw.*
 **/.firebaserc
 .firebase/
 
-app_engin_key.json
+app_engin_key.*
 secret_key.json
 .bash_history
