@@ -4,8 +4,10 @@ const image2base64 = require('image-to-base64');
 const sharp = require("sharp")
 const Canvas = require('canvas'); // node-canvasをrequireする
 const puppeteer = require('puppeteer');
+const os = require('os');
+const path = require('path')
 
-module.exports = functions.https.onRequest(async (request: any, response: any) => {
+module.exports = functions.runWith({memory: '1GB'}).https.onRequest(async (request: any, response: any) => {
   const params = {
     'label': request.query.la || '',
     'message': request.query.me || 'message',
@@ -15,29 +17,41 @@ module.exports = functions.https.onRequest(async (request: any, response: any) =
     'logoColor': request.query.lc || ''
   }
 
+  const tmpdir = os.tmpdir();
+  const filePath = path.join(tmpdir, 'icon.png')
+
   const url = getTransUrl(params)
-  await getSvg(url, 'icon.png')
-  response.send(url)
+  const fileName = await getSvg(url, filePath)
+  let base64 = ''
+  await fs.readFile(fileName, 'base64', function (err: any, data: any) {
+    if (err) throw err
+    console.log(data)
+    base64 = data
+  });
+
+  response.send(base64)
 });
 
 const gousei = async (fileName: string) => {
   // Canvas.Image() メソッドでImg要素を作り、
   // srcに受け取ったファイルのパスをセットする
-  const baseImg = new Canvas.Image();
-  baseImg.src = await fs.readFileSync('dummy.png');
   const overImg = new Canvas.Image();
   overImg.src = await fs.readFileSync(fileName);
 
-  // Canvasを初期化する
-  const canvas = Canvas.createCanvas(baseImg.width, baseImg.height);
+  const twitterCardSize = {
+    width: 600,
+    height: 314
+  }
+  const canvas = Canvas.createCanvas(twitterCardSize.width, twitterCardSize.height);
   const ctx = canvas.getContext('2d');
 
-  // Canvas上に2つの画像を描画する
-  await ctx.drawImage(baseImg, 0, 0);
-  await ctx.drawImage(overImg, (baseImg.width - overImg.width) / 2, (baseImg.height - overImg.height) / 2);
+  // Canvas上に画像を描画する
+  await ctx.drawImage(overImg, (twitterCardSize.width - overImg.width) / 2, (twitterCardSize.height - overImg.height) / 2);
 
   const buf = await canvas.toBuffer();
-  await fs.writeFileSync("test.png", buf);
+  const resultName = `${fileName}.change.png`
+  await fs.writeFileSync(resultName, buf);
+  return resultName
 }
 
 const getSvg = async (url: string, fileName: string) => {
@@ -59,7 +73,7 @@ const getSvg = async (url: string, fileName: string) => {
   await browser.close();
 })();
   
-  await gousei(fileName)
+  return await gousei(fileName)
 }
 
 const getTransUrl = (params: any) => {
