@@ -5,8 +5,23 @@ const common = require("./common");
 
 const storage = admin.storage();
 
-module.exports = functions.runWith({memory: '1GB'}).https.onRequest(
-  async (request: any, response: any) => {
+module.exports = functions
+  .runWith({ memory: "2GB" })
+  .https.onRequest(async (request: any, response: any) => {
+    const userAgent = JSON.stringify(
+      request.headers["user-agent"]
+    ).toLowerCase();
+    console.log(userAgent);
+    if (
+      !userAgent.includes("twitterbot") &&
+      !userAgent.includes("facebook") &&
+      !userAgent.includes("line") &&
+      !userAgent.includes("curl")
+    ) {
+      response.redirect(301, "https://aikon-eaf3a.firebaseapp.com");
+      return
+    }
+
     const params = {
       label: request.query.la || "",
       message: request.query.me || "message",
@@ -20,41 +35,33 @@ module.exports = functions.runWith({memory: '1GB'}).https.onRequest(
     const shasum = crypto.createHash("sha1");
     shasum.update(url); // ここの引数にハッシュを計算したい文字列を渡す
     const uploadName = `cards/${shasum.digest("hex")}.png`;
-    const exists = await storage.bucket().file(uploadName).exists();
+    const exists = await storage
+      .bucket()
+      .file(uploadName)
+      .exists();
     if (exists[0] === false) {
       // イメージがアップロードされていない場合は、アップロードする
-      const isUploadFinish = await common.upload(params)
-      if (isUploadFinish === false) {
-        response.redirect(301, 'https://aikon-eaf3a.firebaseapp.com')
+      console.log("image not found, upload image");
+      const isUploadFinish = await common.upload(params);
+      if (isUploadFinish !== true) {
+        response.redirect(301, "https://aikon-eaf3a.firebaseapp.com");
+        return
       }
     }
 
     const ogpUrl = await getOgpSignedUrl(uploadName);
-    console.log(ogpUrl)
 
-    const userAgent = JSON.stringify(request.headers["user-agent"]).toLowerCase();
-    console.log(userAgent);
-
-    if (
-      userAgent.includes("twitterbot") ||
-      userAgent.includes("facebook") ||
-      userAgent.includes("line")
-    ) {
-      // Twitterボットであるならmetaを送る
-      const html = getHtml({
-        cardType: "summary_large_image",
-        image: ogpUrl,
-        siteUrl: "https://aikon-eaf3a.firebaseapp.com",
-        siteTitle: "AIKON",
-        description: "icon generate support service",
-        account: '@Shitimi_613'
-      });
-      response.send(html);
-    }
-
-    response.redirect(301, 'https://aikon-eaf3a.firebaseapp.com')
-  }
-);
+    // Twitterボットであるならmetaを送る
+    const html = getHtml({
+      cardType: "summary_large_image",
+      image: ogpUrl,
+      siteTitle: "AIKON",
+      description: "icon generate support service",
+      account: "@Shitimi_613"
+    });
+    response.send(html);
+    return
+  });
 
 const getHtml = (param: any) => {
   const template = `
@@ -67,7 +74,6 @@ const getHtml = (param: any) => {
       <meta property="og:title"       content=${param.siteTitle}>
       <meta property="og:description" content="${param.description}" />
       <meta property="og:type"        content="website" />
-      <meta property="og:url"         content="${param.siteUrl}" />
       <meta property="og:image"       content="${param.image}" />
       <meta property="fb:app_id"      content="1234567890123456" />
       <meta name="twitter:card"       content="${param.cardType}" />
