@@ -18,15 +18,22 @@ module.exports = functions.https.onRequest(
 
     const url = common.getTransUrl(params);
     const ogpUrl = await getOgpSignedUrl(url);
-    const html = getHtml({
-      cardType: "summary_large_image",
-      image: ogpUrl,
-      siteUrl: "https://aikon-eaf3a.firebaseapp.com",
-      siteTitle: "AIKON",
-      description: "icon generate support service"
-    });
+    const userAgent = JSON.stringify(request.headers['user-agent'])
+    console.log(userAgent)
 
-    response.send(html);
+    if (userAgent.toLowerCase().includes("twitterbot")) {
+      // Twitterボットであるならmetaを送る
+      const html = getHtml({
+        cardType: "summary_large_image",
+        image: ogpUrl,
+        siteUrl: "https://aikon-eaf3a.firebaseapp.com",
+        siteTitle: "AIKON",
+        description: "icon generate support service"
+      });
+      response.send(html)
+    }
+
+    response.send('not twitter');
   }
 );
 
