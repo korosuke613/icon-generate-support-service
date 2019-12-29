@@ -76,7 +76,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Share from '~/components/Share.vue'
-import Infomation from '~/components/Result.vue'
+import Infomation from '~/components/Infomation.vue'
 
 import IconUrl from '~/components/IconUrl.js'
 const axios = require('axios').default
