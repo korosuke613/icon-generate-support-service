@@ -5,7 +5,7 @@ const common = require("./common");
 
 const storage = admin.storage();
 
-module.exports = functions.https.onRequest(
+module.exports = functions.runWith({memory: '1GB'}).https.onRequest(
   async (request: any, response: any) => {
     const params = {
       label: request.query.la || "",
@@ -17,7 +17,21 @@ module.exports = functions.https.onRequest(
     };
 
     const url = common.getTransUrl(params);
-    const ogpUrl = await getOgpSignedUrl(url);
+    const shasum = crypto.createHash("sha1");
+    shasum.update(url); // ここの引数にハッシュを計算したい文字列を渡す
+    const uploadName = `cards/${shasum.digest("hex")}.png`;
+    const exists = await storage.bucket().file(uploadName).exists();
+    if (exists[0] === false) {
+      // イメージがアップロードされていない場合は、アップロードする
+      const isUploadFinish = await common.upload(params)
+      if (isUploadFinish === false) {
+        response.redirect(301, 'https://aikon-eaf3a.firebaseapp.com')
+      }
+    }
+
+    const ogpUrl = await getOgpSignedUrl(uploadName);
+    console.log(ogpUrl)
+
     const userAgent = JSON.stringify(request.headers["user-agent"]).toLowerCase();
     console.log(userAgent);
 
@@ -68,14 +82,10 @@ const getHtml = (param: any) => {
   return template;
 };
 
-const getOgpSignedUrl = async (url: any) => {
-  const shasum = crypto.createHash("sha1");
-  shasum.update(url); // ここの引数にハッシュを計算したい文字列を渡す
-  const uploadName = shasum.digest("hex");
-
+const getOgpSignedUrl = async (uploadName: any) => {
   const result = await storage
     .bucket()
-    .file(`cards/${uploadName}.png`)
+    .file(uploadName)
     .getSignedUrl({
       action: "read",
       expires: Date.now() + 1000 * 60 * 60 * 24 * 30 // 1month

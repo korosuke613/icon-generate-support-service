@@ -1,13 +1,44 @@
 const fs = require('fs');
 const Canvas = require('canvas'); // node-canvasをrequireする
 const puppeteer = require('puppeteer');
+import * as crypto from "crypto";
+const admin = require('firebase-admin')
+
+const storage = admin.storage()
+
+const os = require('os');
+const path = require('path')
 
 exports.getTransUrl = (params: any) => {
   const url = `https://img.shields.io/static/v1?label=${params.label}&message=${params.message}&color=${params.color}&style=${params.style}&logo=${params.logo}&logoColor=${params.logoColor}`
   return url
 }
 
-exports.getSvg = async (url: string, fileName: string) => {
+exports.upload = async (params: any) => {
+  const tmpdir = os.tmpdir();
+  const filePath = path.join(tmpdir, 'icon.png')
+
+  const url = exports.getTransUrl(params)
+  const tempLocalFile = await getSvg(url, filePath)
+  
+  const metadata = {
+    cacheControl: 'public,max-age=31536000', // 1年キャッシュする
+    contentType: 'image/png'
+  }
+  const shasum = crypto.createHash('sha1')
+  shasum.update(url)
+  const uploadName = shasum.digest('hex')
+
+  console.log(`upload: ${tempLocalFile}`)
+  await storage.bucket().upload(tempLocalFile, {
+    destination: `cards/${uploadName}.png`,
+    metadata
+  })
+
+  return true
+}
+
+const getSvg = async (url: string, fileName: string) => {
   await (async () => {
    const browser = await puppeteer.launch({args: ['--no-sandbox']});
    const page = await browser.newPage();

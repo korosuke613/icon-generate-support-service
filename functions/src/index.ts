@@ -84,7 +84,7 @@ const getHash = (url: string) => {
 }
 
 if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'uploadOgpCard') {
-  exports.getShareOgp = require('./uploadOgpCard');
+  exports.uploadOgpCard = require('./uploadOgpCard');
 }
 
 if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'getShare') {
