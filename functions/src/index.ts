@@ -86,3 +86,7 @@ const getHash = (url: string) => {
 if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'getShareOgp') {
   exports.getShareOgp = require('./getShareOgp');
 }
+
+if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'getShare') {
+  exports.getShare = require('./getShare');
+}
