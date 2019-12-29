@@ -1,5 +1,7 @@
 <template>
   <v-card>
+    <v-card-title>Information</v-card-title>
+
     <v-card-text>
       <v-row>
         <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
