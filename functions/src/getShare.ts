@@ -18,22 +18,27 @@ module.exports = functions.https.onRequest(
 
     const url = common.getTransUrl(params);
     const ogpUrl = await getOgpSignedUrl(url);
-    const userAgent = JSON.stringify(request.headers['user-agent'])
-    console.log(userAgent)
+    const userAgent = JSON.stringify(request.headers["user-agent"]).toLowerCase();
+    console.log(userAgent);
 
-    if (userAgent.toLowerCase().includes("twitterbot")) {
+    if (
+      userAgent.includes("twitterbot") ||
+      userAgent.includes("facebook") ||
+      userAgent.includes("line")
+    ) {
       // Twitterボットであるならmetaを送る
       const html = getHtml({
         cardType: "summary_large_image",
         image: ogpUrl,
         siteUrl: "https://aikon-eaf3a.firebaseapp.com",
         siteTitle: "AIKON",
-        description: "icon generate support service"
+        description: "icon generate support service",
+        account: '@Shitimi_613'
       });
-      response.send(html)
+      response.send(html);
     }
 
-    response.send('not twitter');
+    response.redirect(301, 'https://aikon-eaf3a.firebaseapp.com')
   }
 );
 
@@ -41,15 +46,19 @@ const getHtml = (param: any) => {
   const template = `
   <!DOCTYPE html>
   <html lang="en">
-  <head>
+  <head prefix="og: http://ogp.me/ns# website: http://ogp.me/ns/website#">
       <meta charset="utf-8" />
-      @* Twitter cards *@
-      <meta name="twitter:card" content="${param.cardType}" />
-      <meta name="twitter:site" content="${param.siteUrl}">
-      <meta name="twitter:title" content="${param.siteTitle}" />
-      <meta name="twitter:description" content="${param.description}" />
-      <meta name="twitter:image" content="${param.image}">
-
+      <title>${param.siteTitle}</title>
+      <meta name="description" content="${param.description}">
+      <meta property="og:title"       content=${param.siteTitle}>
+      <meta property="og:description" content="${param.description}" />
+      <meta property="og:type"        content="website" />
+      <meta property="og:url"         content="${param.siteUrl}" />
+      <meta property="og:image"       content="${param.image}" />
+      <meta property="fb:app_id"      content="1234567890123456" />
+      <meta name="twitter:card"       content="${param.cardType}" />
+      <meta name="twitter:site"       content="${param.account}" />
+      <meta name="twitter:creator"    content="${param.account}" />
       <title></title>
   </head>
   <body>
