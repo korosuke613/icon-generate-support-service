@@ -68,7 +68,7 @@
           </v-form>
         </v-card-text>
       </v-card>
-      <infomation />
+      <Information />
     </div>
   </client-only>
 </template>
@@ -76,7 +76,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Share from '~/components/Share.vue'
-import Infomation from '~/components/Infomation.vue'
+import Information from '~/components/Information.vue'
 
 import IconUrl from '~/components/IconUrl.js'
 const axios = require('axios').default
@@ -90,7 +90,7 @@ export default {
   /* eslint-disable no-console */
   components: {
     Share,
-    Infomation
+    Information
   },
   data () {
     return {
