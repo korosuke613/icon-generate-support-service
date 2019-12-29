@@ -14,6 +14,11 @@ exports.getTransUrl = (params: any) => {
   return url
 }
 
+exports.getTransRedirectUrl = (baseUrl: string, params: any) => {
+  const url = `${baseUrl}?la=${params.label}&me=${params.message}&co=${params.color}&st=${params.style}&lo=${params.logo}&lc=${params.logoColor}`
+  return url
+}
+
 exports.upload = async (params: any) => {
   const tmpdir = os.tmpdir();
   const filePath = path.join(tmpdir, 'icon.png')

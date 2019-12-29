@@ -5,9 +5,20 @@ const common = require("./common");
 
 const storage = admin.storage();
 
+const baseRedirectUrl = 'https://aikon-eaf3a.firebaseapp.com/'
+
 module.exports = functions
   .runWith({ memory: "2GB" })
   .https.onRequest(async (request: any, response: any) => {
+    const params = {
+      label: request.query.la || "",
+      message: request.query.me || "message",
+      color: request.query.co || "green",
+      style: request.query.st || "flat",
+      logo: request.query.lo || "none",
+      logoColor: request.query.lc || "none"
+    };
+
     const userAgent = JSON.stringify(
       request.headers["user-agent"]
     ).toLowerCase();
@@ -15,21 +26,12 @@ module.exports = functions
     if (
       !userAgent.includes("twitterbot") &&
       !userAgent.includes("facebook") &&
-      !userAgent.includes("line") &&
-      !userAgent.includes("curl")
+      !userAgent.includes("line") 
+      //!userAgent.includes("curl")
     ) {
-      response.redirect(301, "https://aikon-eaf3a.firebaseapp.com");
+      response.redirect(301, common.getTransRedirectUrl(baseRedirectUrl, params));
       return
     }
-
-    const params = {
-      label: request.query.la || "",
-      message: request.query.me || "message",
-      color: request.query.co || "",
-      style: request.query.st || "",
-      logo: request.query.lo || "",
-      logoColor: request.query.lc || ""
-    };
 
     const url = common.getTransUrl(params);
     const shasum = crypto.createHash("sha1");
@@ -44,7 +46,7 @@ module.exports = functions
       console.log("image not found, upload image");
       const isUploadFinish = await common.upload(params);
       if (isUploadFinish !== true) {
-        response.redirect(301, "https://aikon-eaf3a.firebaseapp.com");
+        response.redirect(301, common.getTransRedirectUrl(baseRedirectUrl, params));
         return
       }
     }
