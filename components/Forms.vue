@@ -10,6 +10,17 @@
           </a>
           <share />
           <v-divider />
+          <v-card-actions>
+            <v-row align="center">
+              <v-col cols="12">
+                <div class="text-center">
+                  <v-btn v-on:click="submit" :to="param" :color="color" dark block>
+                    Generate Icon!
+                  </v-btn>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card-actions>
           <v-form ref="generate_icon_url_form">
             <v-text-field
               @input="setLabel"
@@ -55,19 +66,9 @@
               </v-col>
             </v-row>
           </v-form>
-          <v-card-actions>
-            <v-row align="center">
-              <v-col cols="12">
-                <div class="text-center">
-                  <v-btn v-on:click="submit" :to="param" :color="color" dark block>
-                    Generate Icon!
-                  </v-btn>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card-actions>
         </v-card-text>
       </v-card>
+      <infomation />
     </div>
   </client-only>
 </template>
@@ -75,6 +76,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Share from '~/components/Share.vue'
+import Infomation from '~/components/Result.vue'
 
 import IconUrl from '~/components/IconUrl.js'
 const axios = require('axios').default
@@ -87,7 +89,8 @@ const colorNamesWithStatus = ['none', 'success', 'important', 'critical', 'infor
 export default {
   /* eslint-disable no-console */
   components: {
-    Share
+    Share,
+    Infomation
   },
   data () {
     return {
