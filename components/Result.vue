@@ -11,6 +11,7 @@
           <a @click="lineShare" target="_blank" rel="noopener">
             <v-img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNzUiIGhlaWdodD0iMjAiPjxnIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+PHBhdGggZmlsbD0iIzAwYzMwMCIgZD0iTTAgMGgxOHYyMEgweiIvPjxwYXRoIGZpbGw9IiMwMGMzMDAiIGQ9Ik0xOCAwaDU3djIwSDE4eiIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMsVmVyZGFuYSxHZW5ldmEsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMTAiPjxpbWFnZSB4PSI1IiB5PSIzIiB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5Qm1hV3hzUFNKM2FHbDBaU0lnY205c1pUMGlhVzFuSWlCMmFXVjNRbTk0UFNJd0lEQWdNalFnTWpRaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK1BIUnBkR3hsUGt4cGJtVWdhV052Ymp3dmRHbDBiR1UrUEhCaGRHZ2daRDBpVFRFNUxqTTJOU0E1TGpnMk0yTXVNelE1SURBZ0xqWXpMakk0TlM0Mk15NDJNekVnTUNBdU16UTFMUzR5T0RFdU5qTXRMall6TGpZelNERTNMall4ZGpFdU1USTFhREV1TnpVMVl5NHpORGtnTUNBdU5qTXVNamd6TGpZekxqWXpJREFnTGpNME5DMHVNamd4TGpZeU9TMHVOak11TmpJNWFDMHlMak00Tm1NdExqTTBOU0F3TFM0Mk1qY3RMakk0TlMwdU5qSTNMUzQyTWpsV09DNHhNRGhqTUMwdU16UTFMakk0TWkwdU5qTXVOak10TGpZemFESXVNemcyWXk0ek5EWWdNQ0F1TmpJM0xqSTROUzQyTWpjdU5qTWdNQ0F1TXpRNUxTNHlPREV1TmpNdExqWXpMall6U0RFM0xqWXhkakV1TVRJMWFERXVOelUxZW0wdE15NDROVFVnTXk0d01UWmpNQ0F1TWpjdExqRTNOQzQxTVMwdU5ETXlMalU1TmkwdU1EWTBMakF5TVMwdU1UTXpMakF6TVMwdU1UazVMakF6TVMwdU1qRXhJREF0TGpNNU1TMHVNRGt0TGpVeExTNHlOV3d0TWk0ME5ETXRNeTR6TVRkMk1pNDVOR013SUM0ek5EUXRMakkzT1M0Mk1qa3RMall6TVM0Mk1qa3RMak0wTmlBd0xTNDJNall0TGpJNE5TMHVOakkyTFM0Mk1qbFdPQzR4TURoak1DMHVNamN1TVRjekxTNDFNUzQwTXkwdU5UazFMakEyTFM0d01qTXVNVE0yTFM0d016TXVNVGswTFM0d016TXVNVGsxSURBZ0xqTTNOUzR4TURRdU5EazFMakkxTkd3eUxqUTJNaUF6TGpNelZqZ3VNVEE0WXpBdExqTTBOUzR5T0RJdExqWXpMall6TFM0Mk15NHpORFVnTUNBdU5qTXVNamcxTGpZekxqWXpkalF1TnpjeGVtMHROUzQzTkRFZ01HTXdJQzR6TkRRdExqSTRNaTQyTWprdExqWXpNUzQyTWprdExqTTBOU0F3TFM0Mk1qY3RMakk0TlMwdU5qSTNMUzQyTWpsV09DNHhNRGhqTUMwdU16UTFMakk0TWkwdU5qTXVOak10TGpZekxqTTBOaUF3SUM0Mk1qZ3VNamcxTGpZeU9DNDJNM1kwTGpjM01YcHRMVEl1TkRZMkxqWXlPVWcwTGpreE4yTXRMak0wTlNBd0xTNDJNeTB1TWpnMUxTNDJNeTB1TmpJNVZqZ3VNVEE0WXpBdExqTTBOUzR5T0RVdExqWXpMall6TFM0Mk15NHpORGdnTUNBdU5qTXVNamcxTGpZekxqWXpkalF1TVRReGFERXVOelUyWXk0ek5EZ2dNQ0F1TmpJNUxqSTRNeTQyTWprdU5qTWdNQ0F1TXpRMExTNHlPREl1TmpJNUxTNDJNamt1TmpJNVRUSTBJREV3TGpNeE5FTXlOQ0EwTGprME15QXhPQzQyTVRVdU5UY3lJREV5SUM0MU56SlRNQ0EwTGprME15QXdJREV3TGpNeE5HTXdJRFF1T0RFeElEUXVNamNnT0M0NE5ESWdNVEF1TURNMUlEa3VOakE0TGpNNU1TNHdPREl1T1RJekxqSTFPQ0F4TGpBMU9DNDFPUzR4TWk0ek1ERXVNRGM1TGpjMk5pNHdNemdnTVM0d09Hd3RMakUyTkNBeExqQXlZeTB1TURRMUxqTXdNUzB1TWpRZ01TNHhPRFlnTVM0d05Ea3VOalExSURFdU1qa3hMUzQxTXprZ05pNDVNVFl0TkM0d056Z2dPUzQwTXpZdE5pNDVOelZETWpNdU1UYzJJREUwTGpNNU15QXlOQ0F4TWk0ME5UZ2dNalFnTVRBdU16RTBJaTgrUEM5emRtYysiLz4gPHRleHQgeD0iNDY1IiB5PSIxNDAiIHRyYW5zZm9ybT0ic2NhbGUoLjEpIiB0ZXh0TGVuZ3RoPSI0NzAiPlNoYXJlIPCfmIc8L3RleHQ+PC9nPiA8L3N2Zz4=" />
           </a>
+          <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer" />
         </v-col>
         <v-col cols="3" sm="2" mg="2" lg="2" xl="2">
           <a @click="facebookShare" target="_blank" rel="noopener">
@@ -21,7 +22,7 @@
 
       <v-row>
         <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
-          <v-text-field
+          <v-textarea
             :value="url"
             label="Badge URL"
             readonly
@@ -29,7 +30,7 @@
           />
         </v-col>
         <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
-          <v-text-field
+          <v-textarea
             :value="base64"
             label="BASE64"
             readonly
@@ -37,7 +38,7 @@
           />
         </v-col>
         <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
-          <v-text-field
+          <v-textarea
             :value="sharedUrl"
             label="Share URL"
             readonly
@@ -51,7 +52,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-const axios = require('axios').default
+// const axios = require('axios').default
 
 export default {
   data () {
