@@ -187,49 +187,6 @@ export default {
       }
     },
     ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor', 'setUrl', 'setBase64', 'setStyle', 'setLogo', 'setLogoColor'])
-  },
-  head () {
-    return {
-      meta: [
-        {
-          property: 'og:site_name',
-          content: 'AIKON'
-        },
-        {
-          property: 'og:type',
-          content: 'website'
-        },
-        {
-          property: 'og:url',
-          content: 'https://aikon-eaf3a.web.app/'
-        },
-        {
-          property: 'og:title',
-          content: 'AIKON'
-        },
-        {
-          property: 'og:description',
-          content: 'アイコン生成する'
-        },
-        {
-          property: 'og:image',
-          content: this.url.replace('https://img.shields.io/', 'https://raster.shields.io/')
-            .replace('=message', `=${this.ogpData.me || 'message'}`)
-            .replace('=label', `=${this.ogpData.la || 'label'}`)
-            .replace('=color', `=${this.ogpData.co || 'green'}`)
-            .replace('=flat', `=${this.ogpData.st || 'flat'}`)
-            .replace('=none', `=${this.ogpData.lo || 'none'}`)
-        },
-        {
-          property: 'fb:app_id',
-          content: 'アプリID'
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary_large_image'
-        }
-      ]
-    }
   }
 }
 </script>
