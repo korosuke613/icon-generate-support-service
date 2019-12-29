@@ -70,6 +70,8 @@ const gousei = async (fileName: string) => {
   // srcに受け取ったファイルのパスをセットする
   const overImg = new Canvas.Image();
   overImg.src = await fs.readFileSync(fileName);
+//  const backImg = new Canvas.Image();
+//  backImg.src = await fs.readFileSync('white.png')
 
   const twitterCardSize = {
     width: 600,
@@ -79,6 +81,7 @@ const gousei = async (fileName: string) => {
   const ctx = canvas.getContext('2d');
 
   // Canvas上に画像を描画する
+//  await ctx.drawImage(backImg);
   await ctx.drawImage(overImg, (twitterCardSize.width - overImg.width) / 2, (twitterCardSize.height - overImg.height) / 2);
 
   const buf = await canvas.toBuffer();
