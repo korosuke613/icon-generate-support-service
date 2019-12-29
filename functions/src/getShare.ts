@@ -25,8 +25,8 @@ module.exports = functions
     console.log(userAgent);
     if (
       !userAgent.includes("twitterbot") &&
-      !userAgent.includes("facebook")
-      //!userAgent.includes("line") 
+      !userAgent.includes("facebook") &&
+      !userAgent.includes("hatena") 
       //!userAgent.includes("curl")
     ) {
       response.redirect(301, common.getTransRedirectUrl(baseRedirectUrl, params));
@@ -57,8 +57,8 @@ module.exports = functions
     const html = getHtml({
       cardType: "summary_large_image",
       image: ogpUrl,
-      siteTitle: "AIKON",
-      description: "icon generate support service",
+      siteTitle: `"${params.label} ${params.message}"`,
+      description: "AIKON: icon generate support service",
       account: "@Shitimi_613"
     });
     response.send(html);
@@ -77,7 +77,7 @@ const getHtml = (param: any) => {
       <meta property="og:description" content="${param.description}" />
       <meta property="og:type"        content="website" />
       <meta property="og:image"       content="${param.image}" />
-      <meta property="fb:app_id"      content="1234567890123456" />
+      <meta property="fb:app_id"      content="768944716916112" />
       <meta name="twitter:card"       content="${param.cardType}" />
       <meta name="twitter:site"       content="${param.account}" />
       <meta name="twitter:creator"    content="${param.account}" />
