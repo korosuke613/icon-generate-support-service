@@ -33,7 +33,7 @@
         </v-col>
         <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
           <v-text-field
-            :value="encodeURI(sharedUrl)"
+            :value="sharedUrl"
             label="Share URL"
             readonly
             outlined
