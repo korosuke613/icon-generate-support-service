@@ -8,6 +8,7 @@
             <v-img id="img1" v-if="isHitData" :src="base64" />
             <v-img id="img1" v-else :src="url" />
           </a>
+          <share />
           <v-divider />
           <v-form ref="generate_icon_url_form">
             <v-text-field
@@ -58,7 +59,7 @@
             <v-row align="center">
               <v-col cols="12">
                 <div class="text-center">
-                  <v-btn v-on:click="submit" :to="param" color="orange" dark block>
+                  <v-btn v-on:click="submit" :to="param" :color="color" dark block>
                     Generate Icon!
                   </v-btn>
                 </div>
@@ -67,14 +68,13 @@
           </v-card-actions>
         </v-card-text>
       </v-card>
-      <result />
     </div>
   </client-only>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import Result from '~/components/Result.vue'
+import Share from '~/components/Share.vue'
 
 import IconUrl from '~/components/IconUrl.js'
 const axios = require('axios').default
@@ -87,7 +87,7 @@ const colorNamesWithStatus = ['none', 'success', 'important', 'critical', 'infor
 export default {
   /* eslint-disable no-console */
   components: {
-    Result
+    Share
   },
   data () {
     return {
