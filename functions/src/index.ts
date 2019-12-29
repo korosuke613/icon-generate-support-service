@@ -83,8 +83,8 @@ const getHash = (url: string) => {
   return shasum.digest('hex')
 }
 
-if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'getShareOgp') {
-  exports.getShareOgp = require('./getShareOgp');
+if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'uploadOgpCard') {
+  exports.getShareOgp = require('./uploadOgpCard');
 }
 
 if (!process.env.FUNCTION_NAME || process.env.FUNCTION_NAME === 'getShare') {
