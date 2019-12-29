@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     setTwitterShareUrl () {
-      const url = encodeURIComponent(process.env.baseUrl + 'share/' + this.$nuxt.$route.fullPath)
+      const url = encodeURIComponent(process.env.baseUrl + '/share' + this.$nuxt.$route.fullPath)
       const text = encodeURIComponent('バッジを作成しました😎')
       const hashtags = encodeURIComponent('AIKON')
       // const via = 'Shitimi_613'
