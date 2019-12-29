@@ -25,8 +25,8 @@ module.exports = functions
     console.log(userAgent);
     if (
       !userAgent.includes("twitterbot") &&
-      !userAgent.includes("facebook") &&
-      !userAgent.includes("line") 
+      !userAgent.includes("facebook")
+      //!userAgent.includes("line") 
       //!userAgent.includes("curl")
     ) {
       response.redirect(301, common.getTransRedirectUrl(baseRedirectUrl, params));
