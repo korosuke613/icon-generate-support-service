@@ -54,14 +54,18 @@
               </v-col>
             </v-row>
           </v-form>
+          <v-card-actions>
+            <v-row align="center">
+              <v-col cols="12">
+                <div class="text-center">
+                  <v-btn v-on:click="submit" :to="param" color="orange" dark block>
+                    Generate Icon!
+                  </v-btn>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card-actions>
         </v-card-text>
-        <v-card-actions>
-          <v-btn v-on:click="submit" :to="param">
-            Generate
-          </v-btn>
-          <span v-if="success" />
-          <span v-else> Invalid input </span>
-        </v-card-actions>
       </v-card>
       <result />
     </div>
