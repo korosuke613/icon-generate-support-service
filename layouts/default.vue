@@ -9,6 +9,7 @@
       <v-spacer />
       <v-btn
         @click.stop="fixed = !fixed"
+        @click="getQuery()"
         v-for="(item, i) in items"
         :key="i"
         :to="item.to"
@@ -48,6 +49,7 @@
 
 <script>
 /* eslint-disable no-unused-vars */
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -59,17 +61,17 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Welcome',
-          to: '/'
+          to: { path: '/' }
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
-          to: '/inspire'
+          to: { path: 'inspire' }
         },
         {
           icon: 'mdi-book-information-variant',
           title: 'Forms',
-          to: '/forms'
+          to: { path: '/forms' }
         }
       ],
       miniVariant: false,
@@ -78,8 +80,23 @@ export default {
       title: 'AIKON'
     }
   },
+  computed: {
+    ...mapGetters('iconInfo', ['label', 'message', 'color', 'style', 'logo', 'logoColor'])
+  },
   mounted () {
     const firebase = require('~/plugins/firebase.js')
+  },
+  methods: {
+    getQuery () {
+      this.items[0].to.query = {
+        la: this.label,
+        me: this.message,
+        co: this.color,
+        st: this.style,
+        lo: this.logo,
+        lc: this.logoColor
+      }
+    }
   }
 }
 </script>
