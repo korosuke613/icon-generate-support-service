@@ -21,31 +21,39 @@
             </v-row>
           </v-card-actions>
           <v-form ref="generate_icon_url_form">
-            <v-text-field
-              @input="setLabel"
-              :value="label"
-              label="Label"
-            />
-            <v-text-field
-              :rules="[required]"
-              @input="setMessage"
-              :value="message"
-              label="Message"
-            />
-            <v-text-field
-              :rules="[color_required]"
-              @input="setColor"
-              :value="color"
-              label="Color"
-            />
-            <v-select
-              :items="styles"
-              :value="style"
-              @input="setStyle"
-              label="Styles"
-            />
             <v-row>
-              <v-col class="d-flex" cols="12" sm="6">
+              <v-col class="d-flex" cols="6" sm="6">
+                <v-text-field
+                  @input="setLabel"
+                  :value="label"
+                  label="Label"
+                />
+              </v-col>
+              <v-col class="d-flex" cols="6" sm="6">
+                <v-text-field
+                  :rules="[required]"
+                  @input="setMessage"
+                  :value="message"
+                  label="Message"
+                />
+              </v-col>
+              <v-col class="d-flex" cols="6" sm="6">
+                <v-text-field
+                  :rules="[color_required]"
+                  @input="setColor"
+                  :value="color"
+                  label="Color"
+                />
+              </v-col>
+              <v-col class="d-flex" cols="6" sm="6">
+                <v-select
+                  :items="styles"
+                  :value="style"
+                  @input="setStyle"
+                  label="Styles"
+                />
+              </v-col>
+              <v-col class="d-flex" cols="6" sm="6">
                 <v-autocomplete
                   @input="setLogo"
                   :value="logo"
@@ -55,7 +63,7 @@
                   return-object
                 />
               </v-col>
-              <v-col class="d-flex" cols="12" sm="6">
+              <v-col class="d-flex" cols="6" sm="6">
                 <v-text-field
                   :rules="[color_required]"
                   @input="setLogoColor"
@@ -63,13 +71,15 @@
                   label="Simple Icon Color"
                 />
               </v-col>
+              <v-col class="d-flex" cols="12" sm="6">
+                <v-text-field
+                  :value="embedUrl"
+                  :rules="[url_required]"
+                  @input="setEmbedUrl"
+                  label="Embed URL (optional)"
+                />
+              </v-col>
             </v-row>
-            <v-text-field
-              :value="embedUrl"
-              :rules="[url_required]"
-              @input="setEmbedUrl"
-              label="Embed URL (optional)"
-            />
           </v-form>
         </v-card-text>
       </v-card>
