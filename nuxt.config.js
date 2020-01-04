@@ -14,7 +14,7 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'BEENOCKER: easy budge generator' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'og:url', property: 'og:url', content: 'https://aikon-eaf3a.firebaseapp.com' },
+      { hid: 'og:url', property: 'og:url', content: 'https://beenocker.tech/' },
       { hid: 'og:title', property: 'og:title', content: 'BEENOCKER: easy budge generator' },
       { hid: 'og:description', property: 'og:description', content: 'Easy budge generator' },
       { hid: 'og:image', property: 'og:image', content: 'https://storage.googleapis.com/aikon-eaf3a.appspot.com/cards/f6d9c37aa45fedf11718f11af97f3c940f17332f.png?GoogleAccessId=aikon-eaf3a%40appspot.gserviceaccount.com&Expires=1742169600&Signature=Stfz8pgqD2CLHI4hkhilREI4DGxTz%2FwGICqD6ah3m6kb9hofsT8tf7PLbTV48R3AWLcrrjNLVaz%2BMkCD2GcnIl%2FWg1VQiq8JxTDaJ%2B4WM5ShpKvS%2B44s1fzTcMVh9Ok8P0Lo8vbVPg1l2ILhOs0LIltmhWz%2F69M8NS%2BqWDksqc2b0tLsxwzBuyUJTV%2B7JNGmqi1LdEQy4xbOdaiLANs6PfHaeRfdJl1iUsHbJx2fY2L0PJZXU%2FUh2kYIl%2Baea6pjfA%2Bcr%2BXF6mv%2FmiwzOiqfAQKg5NP6hK8YxaznvhT%2FEuzeIxW7bmlO38MGN02u7W1rRgLPZZaaCyGSd5J1A%2B7f2w%3D%3D' },
@@ -25,7 +25,7 @@ export default {
     ]
   },
   env: {
-    baseUrl: process.env.BASE_URL || 'https://aikon-eaf3a.firebaseapp.com'
+    baseUrl: process.env.BASE_URL || 'https://beenocker.tech/'
   },
   /*
   ** Customize the progress-bar color

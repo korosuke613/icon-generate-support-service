@@ -5,7 +5,7 @@ const common = require("./common");
 
 const storage = admin.storage();
 
-const baseRedirectUrl = 'https://aikon-eaf3a.firebaseapp.com/'
+const baseRedirectUrl = 'https://beenocker.tech/'
 
 module.exports = functions
   .runWith({ memory: "2GB" })
