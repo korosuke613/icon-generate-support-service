@@ -12,11 +12,11 @@ import {
 } from './mutationType.js'
 
 export const state = () => ({
-  label: 'label',
-  message: 'message',
-  color: 'green',
-  style: 'flat',
-  url: 'https://img.shields.io/static/v1?label=label&message=message&color=red&style=flat&logo=none',
+  label: 'BEENOCKER',
+  message: 'easy budge generator',
+  color: 'purple',
+  style: 'flat-square',
+  url: 'https://img.shields.io/static/v1?label=BEENOCKER&message=easy%20budge%20generator&color=purple&style=flat-square',
   base64: 'please click generate',
   logs: [],
   logo: 'none',
