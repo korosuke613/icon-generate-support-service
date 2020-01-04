@@ -48,7 +48,7 @@ const getSvg = async (url: string, fileName: string) => {
    const browser = await puppeteer.launch({args: ['--no-sandbox']});
    const page = await browser.newPage();
    await page.goto(url);
-   await page.setViewport({width: 300, height: 300, deviceScaleFactor:2.5});
+   await page.setViewport({width: 300, height: 300, deviceScaleFactor:3.0});
  
    const clip = await page.evaluate((s: any) => {
      const el = document.querySelector(s)
