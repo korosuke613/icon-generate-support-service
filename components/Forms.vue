@@ -1,96 +1,89 @@
 <template>
   <client-only placeholder="Loading...">
     <div>
-      <v-card>
-        <v-card-title>Forms</v-card-title>
-        <v-card-text>
-          <a :href="rasterUrl">
-            <v-img id="img1" v-if="isHitData" :src="base64" />
-            <v-img id="img1" v-else :src="url" />
-          </a>
-          <v-divider />
-          <v-card-actions>
-            <v-row align="center">
-              <v-col cols="12">
-                <div class="text-center">
-                  <v-btn v-on:click="submit" :to="param" :color="convertedColor()" dark block>
-                    Generate Icon!
-                  </v-btn>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card-actions>
-          <v-form ref="generate_icon_url_form">
-            <v-row>
-              <v-col class="d-flex" cols="6" sm="6">
-                <v-text-field
-                  @input="setLabel"
-                  :value="label"
-                  label="Label"
-                />
-              </v-col>
-              <v-col class="d-flex" cols="6" sm="6">
-                <v-text-field
-                  :rules="[required]"
-                  @input="setMessage"
-                  :value="message"
-                  label="Message"
-                />
-              </v-col>
-              <v-col class="d-flex" cols="6" sm="6">
-                <v-text-field
-                  :rules="[color_required]"
-                  @input="setColor"
-                  :value="color"
-                  label="Color"
-                />
-              </v-col>
-              <v-col class="d-flex" cols="6" sm="6">
-                <v-select
-                  :items="styles"
-                  :value="style"
-                  @input="setStyle"
-                  label="Styles"
-                />
-              </v-col>
-              <v-col class="d-flex" cols="6" sm="6">
-                <v-autocomplete
-                  @input="setLogo"
-                  :value="logo"
-                  :items="logos"
-                  label="Simple Icon"
-                  placeholder="Start typing to Search"
-                  return-object
-                />
-              </v-col>
-              <v-col class="d-flex" cols="6" sm="6">
-                <v-text-field
-                  :rules="[color_required]"
-                  @input="setLogoColor"
-                  :value="logoColor"
-                  label="Simple Icon Color"
-                />
-              </v-col>
-              <v-col class="d-flex" cols="12" sm="6">
-                <v-text-field
-                  :value="embedUrl"
-                  :rules="[url_required]"
-                  @input="setEmbedUrl"
-                  label="Embed URL (optional)"
-                />
-              </v-col>
-            </v-row>
-          </v-form>
-        </v-card-text>
-      </v-card>
-      <Information />
+      <a :href="rasterUrl">
+        <v-img id="img1" v-if="isHitData" :src="base64" />
+        <v-img id="img1" v-else :src="url" />
+      </a>
+      <v-divider />
+      <v-card-actions>
+        <v-row align="center">
+          <v-col cols="12">
+            <div class="text-center">
+              <v-btn v-on:click="submit" :to="param" :color="convertedColor()" dark block>
+                Generate Icon!
+              </v-btn>
+            </div>
+          </v-col>
+        </v-row>
+      </v-card-actions>
+      <v-form ref="generate_icon_url_form">
+        <v-row>
+          <v-col class="d-flex" cols="6" sm="6">
+            <v-text-field
+              @input="setLabel"
+              :value="label"
+              label="Label"
+            />
+          </v-col>
+          <v-col class="d-flex" cols="6" sm="6">
+            <v-text-field
+              :rules="[required]"
+              @input="setMessage"
+              :value="message"
+              label="Message"
+            />
+          </v-col>
+          <v-col class="d-flex" cols="6" sm="6">
+            <v-text-field
+              :rules="[color_required]"
+              @input="setColor"
+              :value="color"
+              label="Color"
+            />
+          </v-col>
+          <v-col class="d-flex" cols="6" sm="6">
+            <v-select
+              :items="styles"
+              :value="style"
+              @input="setStyle"
+              label="Styles"
+            />
+          </v-col>
+          <v-col class="d-flex" cols="6" sm="6">
+            <v-autocomplete
+              @input="setLogo"
+              :value="logo"
+              :items="logos"
+              label="Simple Icon"
+              placeholder="Start typing to Search"
+              return-object
+            />
+          </v-col>
+          <v-col class="d-flex" cols="6" sm="6">
+            <v-text-field
+              :rules="[color_required]"
+              @input="setLogoColor"
+              :value="logoColor"
+              label="Simple Icon Color"
+            />
+          </v-col>
+          <v-col class="d-flex" cols="12" sm="6">
+            <v-text-field
+              :value="embedUrl"
+              :rules="[url_required]"
+              @input="setEmbedUrl"
+              label="Embed URL (optional)"
+            />
+          </v-col>
+        </v-row>
+      </v-form>
     </div>
   </client-only>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import Information from '~/components/Information.vue'
 
 import IconUrl from '~/components/IconUrl.js'
 const axios = require('axios').default
@@ -103,9 +96,6 @@ const colorNamesWithStatus = ['none', 'success', 'important', 'critical', 'infor
 
 export default {
   /* eslint-disable no-console */
-  components: {
-    Information
-  },
   data () {
     return {
       iconUrl: new IconUrl(),

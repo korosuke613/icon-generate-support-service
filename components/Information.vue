@@ -22,7 +22,7 @@
             onclick="this.select();"
           />
         </v-col>
-        <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
+        <v-col cols="6" sm="6" md="6" lg="6" xl="6">
           <v-textarea
             :value="url"
             label="Badge URL"
@@ -31,7 +31,7 @@
             onclick="this.select();"
           />
         </v-col>
-        <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
+        <v-col cols="6" sm="6" md="6" lg="6" xl="6">
           <v-textarea
             :value="base64"
             label="BASE64"
@@ -40,7 +40,7 @@
             onclick="this.select();"
           />
         </v-col>
-        <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
+        <v-col cols="6" sm="6" md="6" lg="6" xl="6">
           <v-textarea
             :value="sharedUrl"
             label="Share URL"
