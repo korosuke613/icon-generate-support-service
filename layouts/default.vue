@@ -94,14 +94,16 @@ export default {
   },
   methods: {
     getQuery () {
-      this.items[0].to.query = {
-        la: this.label,
-        me: this.message,
-        co: this.color,
-        st: this.style,
-        lo: this.logo,
-        lc: this.logoColor
-      }
+      this.items.forEach((it) => {
+        it.to.query = {
+          la: this.label,
+          me: this.message,
+          co: this.color,
+          st: this.style,
+          lo: this.logo,
+          lc: this.logoColor
+        }
+      })
     }
   }
 }
