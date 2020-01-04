@@ -60,11 +60,11 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('iconInfo', ['url', 'base64', 'sharedUrl', 'embedUrl'])
+    ...mapGetters('iconInfo', ['label', 'message', 'url', 'base64', 'sharedUrl', 'embedUrl'])
   },
   methods: {
     getMarkdown () {
-      return `[![BEENOCKER: easy budge generator](${this.url})](${this.embedUrl})`
+      return `[![${this.label} ${this.message}](${this.url})](${this.embedUrl})`
     },
     getHtml () {
       return `<a href="${this.embedUrl}"><img src="${this.url}" /></a>`
