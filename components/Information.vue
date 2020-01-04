@@ -10,6 +10,7 @@
             label="Badge URL"
             readonly
             outlined
+            onclick="this.select();"
           />
         </v-col>
         <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
@@ -18,6 +19,7 @@
             label="BASE64"
             readonly
             outlined
+            onclick="this.select();"
           />
         </v-col>
         <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
@@ -26,6 +28,7 @@
             label="Share URL"
             readonly
             outlined
+            onclick="this.select();"
           />
         </v-col>
       </v-row>
