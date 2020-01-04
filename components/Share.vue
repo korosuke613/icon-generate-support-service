@@ -62,7 +62,7 @@ export default {
     },
     setTwitterShareUrl () {
       const text = encodeURIComponent('バッジを作成しました😎')
-      const hashtags = encodeURIComponent('AIKON')
+      const hashtags = encodeURIComponent('BEENOCKER')
       // const via = 'Shitimi_613'
       this.twitterShareUrl = `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=${encodeURIComponent(this.sharedUrl)}`
     },

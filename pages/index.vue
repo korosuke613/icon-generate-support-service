@@ -37,7 +37,7 @@ export default {
   },
   head () {
     return {
-      title: 'AIKON',
+      title: 'BEENOCKER: easy budge generator',
       titleTemplate: ''
     }
   }

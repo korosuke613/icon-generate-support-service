@@ -58,7 +58,7 @@ module.exports = functions
       cardType: "summary_large_image",
       image: ogpUrl,
       siteTitle: `"${params.label} ${params.message}"`,
-      description: "AIKON: icon generate support service",
+      description: "BEENOCKER: easy budge generator",
       account: "@Shitimi_613"
     });
     response.send(html);

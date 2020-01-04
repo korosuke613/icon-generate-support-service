@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     getMarkdown () {
-      return `[![AIKON](${this.url})](${this.embedUrl})`
+      return `[![BEENOCKER: easy budge generator](${this.url})](${this.embedUrl})`
     },
     getHtml () {
       return `<a href="${this.embedUrl}"><img src="${this.url}" /></a>`
