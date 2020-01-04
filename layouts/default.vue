@@ -20,7 +20,9 @@
       <span>&copy; 2019</span>
     </v-app-bar>
     <v-content>
-      <nuxt />
+      <v-container>
+        <nuxt />
+      </v-container>
     </v-content>
     <v-navigation-drawer
       v-model="rightDrawer"
