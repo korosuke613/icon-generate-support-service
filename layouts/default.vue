@@ -5,7 +5,9 @@
       fixed
       app
     >
-      <v-toolbar-title v-text="title" />
+      <nuxt-link :to="top.to">
+        <v-img alt="BEENOCKER - Easy Budge Generator" width="300px" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjEwIiBoZWlnaHQ9IjIwIj48bGluZWFyR3JhZGllbnQgaWQ9ImIiIHgyPSIwIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYmJiIiBzdG9wLW9wYWNpdHk9Ii4xIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLW9wYWNpdHk9Ii4xIi8+PC9saW5lYXJHcmFkaWVudD48Y2xpcFBhdGggaWQ9ImEiPjxyZWN0IHdpZHRoPSIyMTAiIGhlaWdodD0iMjAiIHJ4PSIzIiBmaWxsPSIjZmZmIi8+PC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGZpbGw9IiM1NTUiIGQ9Ik0wIDBoNzl2MjBIMHoiLz48cGF0aCBmaWxsPSJwdXJwbGUiIGQ9Ik03OSAwaDEzMXYyMEg3OXoiLz48cGF0aCBmaWxsPSJ1cmwoI2IpIiBkPSJNMCAwaDIxMHYyMEgweiIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMsVmVyZGFuYSxHZW5ldmEsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMTAiPiA8dGV4dCB4PSI0MDUiIHk9IjE1MCIgZmlsbD0iIzAxMDEwMSIgZmlsbC1vcGFjaXR5PSIuMyIgdHJhbnNmb3JtPSJzY2FsZSguMSkiIHRleHRMZW5ndGg9IjY5MCI+QkVFTk9DS0VSPC90ZXh0Pjx0ZXh0IHg9IjQwNSIgeT0iMTQwIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgdGV4dExlbmd0aD0iNjkwIj5CRUVOT0NLRVI8L3RleHQ+PHRleHQgeD0iMTQzNSIgeT0iMTUwIiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgdGV4dExlbmd0aD0iMTIxMCI+ZWFzeSBidWRnZSBnZW5lcmF0b3I8L3RleHQ+PHRleHQgeD0iMTQzNSIgeT0iMTQwIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgdGV4dExlbmd0aD0iMTIxMCI+ZWFzeSBidWRnZSBnZW5lcmF0b3I8L3RleHQ+PC9nPiA8L3N2Zz4=" />
+      </nuxt-link>
       <v-spacer />
       <v-btn
         @click.stop="fixed = !fixed"
@@ -65,21 +67,16 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
+      top: {
+        icon: 'mdi-apps',
+        title: 'Welcome',
+        to: { path: '/' }
+      },
       items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: { path: '/' }
-        },
         {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
           to: { path: 'inspire' }
-        },
-        {
-          icon: 'mdi-book-information-variant',
-          title: 'Forms',
-          to: { path: '/forms' }
         }
       ],
       miniVariant: false,
@@ -96,16 +93,18 @@ export default {
   },
   methods: {
     getQuery () {
+      const tmp = {
+        la: this.label,
+        me: this.message,
+        co: this.color,
+        st: this.style,
+        lo: this.logo,
+        lc: this.logoColor
+      }
       this.items.forEach((it) => {
-        it.to.query = {
-          la: this.label,
-          me: this.message,
-          co: this.color,
-          st: this.style,
-          lo: this.logo,
-          lc: this.logoColor
-        }
+        it.to.query = tmp
       })
+      this.top.to.query = tmp
     }
   }
 }
