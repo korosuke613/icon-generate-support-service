@@ -14,7 +14,7 @@
             <v-row align="center">
               <v-col cols="12">
                 <div class="text-center">
-                  <v-btn v-on:click="submit" :to="param" :color="color" dark block>
+                  <v-btn v-on:click="submit" :to="param" :color="convertedColor()" dark block>
                     Generate Icon!
                   </v-btn>
                 </div>
@@ -80,6 +80,7 @@ import Information from '~/components/Information.vue'
 
 import IconUrl from '~/components/IconUrl.js'
 const axios = require('axios').default
+const Color = require('color')
 
 const simpleIcons = require('~/assets/simple_icons.json').icons
 const simpleIconsOnlyName = ['none'].concat(simpleIcons.map(icon => icon.title))
@@ -138,6 +139,14 @@ export default {
     }
   },
   methods: {
+    convertedColor () {
+      try {
+        const c = Color(`${this.color}`)
+        return c.hex()
+      } catch (e) {
+        return `#${this.color}`
+      }
+    },
     setGetParams () {
       if (this.$nuxt.$route.query.la !== undefined) { this.setLabel(this.$nuxt.$route.query.la) }
       if (this.$nuxt.$route.query.me !== undefined) { this.setMessage(this.$nuxt.$route.query.me) }
