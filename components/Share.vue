@@ -19,9 +19,16 @@
           </a>
         </v-col>
         <v-col cols="3" sm="2" mg="2" lg="2" xl="3">
-          <a @click="facebookShare" target="_blank" rel="noopener">
+          <a @click="onCopy(); snackbar = true" target="_blank" rel="noopener">
             <v-img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNzciIGhlaWdodD0iMjAiPjxnIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+PHBhdGggZmlsbD0iI2ZlN2QzNyIgZD0iTTAgMGgwdjIwSDB6Ii8+PHBhdGggZmlsbD0iI2ZlN2QzNyIgZD0iTTAgMGg3N3YyMEgweiIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMsVmVyZGFuYSxHZW5ldmEsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMTAiPiA8dGV4dCB4PSIzODUiIHk9IjE0MCIgdHJhbnNmb3JtPSJzY2FsZSguMSkiIHRleHRMZW5ndGg9IjY3MCI+Q29weSBVUkwg8J+YjjwvdGV4dD48L2c+IDwvc3ZnPg==" />
           </a>
+          <v-snackbar
+            v-model="snackbar"
+            :timeout="timeout"
+            color="orange"
+          >
+            Copy to Clipboard!
+          </v-snackbar>
         </v-col>
       </v-row>
     </v-card-text>
@@ -37,7 +44,9 @@ export default {
     return {
       twitterShareUrl: '',
       facebookShareUrl: '',
-      lineShareUrl: ''
+      lineShareUrl: '',
+      snackbar: false,
+      timeout: 2000
     }
   },
   computed: {
@@ -49,6 +58,9 @@ export default {
     this.setLineShareUrl()
   },
   methods: {
+    onCopy () {
+      this.$copyText(this.sharedUrl)
+    },
     setTwitterShareUrl () {
       const text = encodeURIComponent('バッジを作成しました😎')
       const hashtags = encodeURIComponent('AIKON')

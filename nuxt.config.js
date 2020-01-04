@@ -54,6 +54,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    'nuxt-clipboard2'
   ],
   /*
   ** vuetify module configuration
