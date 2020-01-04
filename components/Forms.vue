@@ -64,6 +64,12 @@
                 />
               </v-col>
             </v-row>
+            <v-text-field
+              :value="embedUrl"
+              :rules="[url_required]"
+              @input="setEmbedUrl"
+              label="Embed URL (optional)"
+            />
           </v-form>
         </v-card-text>
       </v-card>
@@ -99,6 +105,11 @@ export default {
       styles: ['flat', 'flat-square', 'plastic', 'for-the-badge', 'social'],
       logos: simpleIconsOnlyName,
       required: value => !!value || 'Please be sure to input.', // 入力必須の制約
+      url_required: (value) => {
+        if (value === '') { return true }
+        const pattern = /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/
+        return pattern.test(value) || 'Invalid Url'
+      },
       color_required: (value) => {
         const pattern = /^([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
         const reservedColors = colorNamesWithStatus
@@ -112,7 +123,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url', 'base64', 'style', 'logo', 'logoColor', 'param', 'rasterUrl'])
+    ...mapGetters('iconInfo', ['label', 'message', 'color', 'url', 'base64', 'style', 'logo', 'logoColor', 'param', 'rasterUrl', 'embedUrl'])
   },
   created () {
     this.setGetParams()
@@ -199,7 +210,7 @@ export default {
         this.success = false
       }
     },
-    ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor', 'setUrl', 'setBase64', 'setStyle', 'setLogo', 'setLogoColor'])
+    ...mapActions('iconInfo', ['setLabel', 'setMessage', 'setColor', 'setUrl', 'setBase64', 'setStyle', 'setLogo', 'setLogoColor', 'setEmbedUrl'])
   }
 }
 </script>

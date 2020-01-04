@@ -4,6 +4,24 @@
 
     <v-card-text>
       <v-row>
+        <v-col cols="12">
+          <v-text-field
+            :value="getMarkdown()"
+            label="Markdown"
+            readonly
+            outlined
+            onclick="this.select();"
+          />
+        </v-col>
+        <v-col cols="12">
+          <v-text-field
+            :value="getHtml()"
+            label="HTML"
+            readonly
+            outlined
+            onclick="this.select();"
+          />
+        </v-col>
         <v-col cols="6" sm="6" mg="6" lg="6" xl="6">
           <v-textarea
             :value="url"
@@ -42,7 +60,15 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('iconInfo', ['url', 'base64', 'sharedUrl'])
+    ...mapGetters('iconInfo', ['url', 'base64', 'sharedUrl', 'embedUrl'])
+  },
+  methods: {
+    getMarkdown () {
+      return `[![AIKON](${this.url})](${this.embedUrl})`
+    },
+    getHtml () {
+      return `<a href="${this.embedUrl}"><img src="${this.url}" /></a>`
+    }
   }
 }
 </script>

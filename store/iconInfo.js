@@ -7,7 +7,8 @@ import {
   SET_BASE64,
   SET_STYLE,
   SET_LOGO,
-  SET_LOGO_COLOR
+  SET_LOGO_COLOR,
+  SET_EMBED_URL
 } from './mutationType.js'
 
 export const state = () => ({
@@ -20,7 +21,8 @@ export const state = () => ({
   logs: [],
   logo: 'none',
   logoColor: 'none',
-  logCount: 0
+  logCount: 0,
+  embedUrl: ''
 })
 
 export const mutations = {
@@ -51,6 +53,9 @@ export const mutations = {
   },
   [SET_LOGO_COLOR] (state, logoColor) {
     state.logoColor = logoColor
+  },
+  [SET_EMBED_URL] (state, embedUrl) {
+    state.embedUrl = embedUrl
   }
 }
 
@@ -78,6 +83,9 @@ export const actions = {
   },
   setLogoColor ({ commit }, logoColor) {
     commit(SET_LOGO_COLOR, logoColor)
+  },
+  setEmbedUrl ({ commit }, embedUrl) {
+    commit(SET_EMBED_URL, embedUrl)
   }
 }
 
@@ -117,5 +125,8 @@ export const getters = {
   },
   sharedUrl (state) {
     return process.env.baseUrl + '/share' + `/?la=${encodeURI(state.label)}&me=${encodeURI(state.message)}&co=${state.color}&st=${state.style}&lo=${encodeURI(state.logo)}&lc=${state.logoColor}`
+  },
+  embedUrl (state) {
+    return state.embedUrl
   }
 }
