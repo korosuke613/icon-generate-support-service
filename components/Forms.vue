@@ -8,7 +8,6 @@
             <v-img id="img1" v-if="isHitData" :src="base64" />
             <v-img id="img1" v-else :src="url" />
           </a>
-          <share />
           <v-divider />
           <v-card-actions>
             <v-row align="center">
@@ -75,7 +74,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import Share from '~/components/Share.vue'
 import Information from '~/components/Information.vue'
 
 import IconUrl from '~/components/IconUrl.js'
@@ -90,7 +88,6 @@ const colorNamesWithStatus = ['none', 'success', 'important', 'critical', 'infor
 export default {
   /* eslint-disable no-console */
   components: {
-    Share,
     Information
   },
   data () {
