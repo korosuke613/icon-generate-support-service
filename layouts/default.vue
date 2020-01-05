@@ -19,7 +19,6 @@
       >
         <v-icon>{{ item.icon }}</v-icon>
       </v-btn>
-      <span>&copy; 2019</span>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -74,7 +73,7 @@ export default {
       },
       items: [
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-human-greeting',
           title: 'Inspire',
           to: { path: 'inspire' }
         }
