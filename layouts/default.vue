@@ -6,7 +6,7 @@
       app
     >
       <nuxt-link :to="top.to">
-        <v-img alt="BEENOCKER - Easy Budge Generator" width="250px" src="/beenocker_logo.svg" />
+        <v-img alt="BEENOCKER - Easy Budge Generator" width="250px" src="/beenocker_logo_detail.svg" />
       </nuxt-link>
       <v-spacer />
       <v-btn

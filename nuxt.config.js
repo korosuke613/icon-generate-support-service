@@ -17,7 +17,7 @@ export default {
       { hid: 'og:url', property: 'og:url', content: 'https://beenocker.tech/' },
       { hid: 'og:title', property: 'og:title', content: 'BEENOCKER: easy budge generator' },
       { hid: 'og:description', property: 'og:description', content: 'Easy budge generator' },
-      { hid: 'og:image', property: 'og:image', content: 'https://storage.googleapis.com/aikon-eaf3a.appspot.com/cards/61d301eca475e5338c86bce5caeec338c51e290a.png?GoogleAccessId=aikon-eaf3a%40appspot.gserviceaccount.com&Expires=1580770321&Signature=Fep2kTFEFn7Sc5EtUpk%2BisAGtltvheYmDHHTvdQF75gJzwba3UIRLtfq%2BUQyg9Q6a5iX%2BtoMWrpoOhyWZGE9FJbAdnHaH84Vqh%2Bkibuc5gqypdLyZL2INK9D2sIZq50WTleRjcXQhozawod%2BDuQHJ5mvWGBSWDx1Ty2l%2FWHi%2BUG826O4bxWqwPMgDpG0foCrq8aLnCn4Q2nUby2OiNrkhA2PWlnhHM1Nvjp86BaC3mp%2FAn8gvLTAXsj3PNVZeVrafeP2bvrejFoPXz%2Fd5Qs2Sf963Iaf6NCJIAfb4DY75pVJX5moWWmW1NeQq9%2F8PRiYoXLJNLxqsFiAHX0nqBWLkw%3D%3D' },
+      { hid: 'og:image', property: 'og:image', content: 'https://beenocker.tech/beenocker_ogp_logo.png' },
       { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' }
     ],
     script: [
@@ -28,7 +28,8 @@ export default {
       }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'image_src', type: 'image/png', href: '/beenocker_ogp_logo.png' }
     ]
   },
   env: {

@@ -34,7 +34,7 @@
         @click="dialog = true"
         icon
       >
-        <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+        More
       </v-btn>
       <v-dialog
         v-model="dialog"
