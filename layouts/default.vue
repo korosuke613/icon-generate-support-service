@@ -81,9 +81,6 @@ export default {
           to: { path: 'inspire' }
         }
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
       title: 'BEENOCKER: easy budge generator'
     }
   },
