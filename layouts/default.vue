@@ -23,9 +23,9 @@
     </v-content>
     <v-navigation-drawer
       v-model="drawer"
-      absolute
       right
       temporary
+      fixed
     >
       <v-list-item>
         <v-list-item-content>
@@ -35,7 +35,7 @@
 
       <v-divider />
 
-      <v-list dense>
+      <v-list height="300px">
         <v-list-item
           v-for="item in items"
           :key="item.title"
@@ -63,6 +63,7 @@ import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
+      group: null,
       clipped: false,
       drawer: false,
       items: [
@@ -92,6 +93,11 @@ export default {
   },
   computed: {
     ...mapGetters('iconInfo', ['label', 'message', 'color', 'style', 'logo', 'logoColor'])
+  },
+  watch: {
+    group () {
+      this.drawer = false
+    }
   },
   mounted () {
     const firebase = require('~/plugins/firebase.js')
