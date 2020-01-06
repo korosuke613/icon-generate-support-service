@@ -5,7 +5,7 @@
     </v-card-title>
     <v-card-text>
       BEENOCKER is a site where you can easily generate badges. It also generates code that can be embedded in HTML, Markdown.
-      BEENOCKER uses the URL of Shilds.io generated from the set value.
+      BEENOCKER uses the URL of <a href="https://shields.io/">Shields.io</a> generated from the set value.
     </v-card-text>
 
     <v-card-title>
