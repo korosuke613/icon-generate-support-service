@@ -21,7 +21,7 @@
       :timeout="timeout"
       color="purple"
     >
-      Copy to Clipboard!
+      Copy Share Link to Clipboard!
     </v-snackbar>
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
         { click: this.twitterShare, color: '#1DA1F2', icon: 'fab fa-twitter' },
         { click: this.lineShare, color: '#53b535', icon: 'fab fa-line' },
         { click: this.facebookShare, color: '#1877F2', icon: 'fab fa-facebook' },
-        { click: this.onCopy, color: 'purple', icon: 'fas fa-code' }
+        { click: this.onCopy, color: 'purple', icon: 'fas fa-share' }
       ]
     }
   },
