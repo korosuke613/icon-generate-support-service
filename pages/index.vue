@@ -17,7 +17,7 @@
           <information />
         </v-col>
         <v-col cols="12">
-          <message />
+          <usage />
         </v-col>
       </v-row>
     </v-flex>
@@ -26,14 +26,14 @@
 
 <script>
 import Forms from '~/components/Forms.vue'
-import Message from '~/components/Message.vue'
 import Information from '~/components/Information.vue'
+import Usage from '~/components/Usage.vue'
 
 export default {
   components: {
     Forms,
-    Message,
-    Information
+    Information,
+    Usage
   },
   head () {
     return {

@@ -3,7 +3,7 @@
     <v-card-title>Information</v-card-title>
 
     <v-card-text>
-      <v-row>
+      <v-row dense no-gutters>
         <v-col cols="12">
           <v-textarea
             :value="getMarkdown()"
@@ -25,47 +25,75 @@
           />
         </v-col>
       </v-row>
-      <v-expansion-panels
-        flat="true"
-      >
-        <v-expansion-panel>
-          <v-expansion-panel-header>more</v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-row>
-              <v-col cols="6" sm="6" md="6" lg="6" xl="6">
-                <v-textarea
-                  :value="url"
-                  label="Badge URL"
-                  readonly
-                  outlined
-                  no-resize="true"
-                  onclick="this.select();"
-                />
-              </v-col>
-              <v-col cols="6" sm="6" md="6" lg="6" xl="6">
-                <v-textarea
-                  :value="base64"
-                  label="BASE64"
-                  readonly
-                  outlined
-                  no-resize="true"
-                  onclick="this.select();"
-                />
-              </v-col>
-              <v-col cols="6" sm="6" md="6" lg="6" xl="6">
-                <v-textarea
-                  :value="sharedUrl"
-                  label="Share URL"
-                  readonly
-                  outlined
-                  no-resize="true"
-                  onclick="this.select();"
-                />
-              </v-col>
-            </v-row>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
+      <v-row justify="end" dense no-gutters>
+        <v-btn
+          @click.stop="dialog = true"
+          color="purple"
+          dark
+          fab
+        >
+          <v-icon dark>
+            mdi-format-list-bulleted-square
+          </v-icon>
+        </v-btn>
+        <v-dialog
+          v-model="dialog"
+          max-width="500"
+        >
+          <v-card>
+            <v-card-title class="headline">
+              More Information
+            </v-card-title>
+
+            <v-card-text>
+              <v-row>
+                <v-col cols="12">
+                  <v-textarea
+                    :value="url"
+                    label="Badge URL"
+                    readonly
+                    outlined
+                    no-resize="true"
+                    onclick="this.select();"
+                  />
+                </v-col>
+                <v-col cols="12">
+                  <v-textarea
+                    :value="base64"
+                    label="BASE64"
+                    readonly
+                    outlined
+                    no-resize="true"
+                    onclick="this.select();"
+                  />
+                </v-col>
+                <v-col cols="12">
+                  <v-textarea
+                    :value="sharedUrl"
+                    label="Share URL"
+                    readonly
+                    outlined
+                    no-resize="true"
+                    onclick="this.select();"
+                  />
+                </v-col>
+              </v-row>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer />
+
+              <v-btn
+                @click="dialog = false"
+                color="green darken-1"
+                text
+              >
+                Close
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
     </v-card-text>
   </v-card>
 </template>
@@ -75,6 +103,11 @@ import { mapGetters } from 'vuex'
 // const axios = require('axios').default
 
 export default {
+  data () {
+    return {
+      dialog: false
+    }
+  },
   computed: {
     ...mapGetters('iconInfo', ['label', 'message', 'url', 'base64', 'sharedUrl', 'embedUrl'])
   },
