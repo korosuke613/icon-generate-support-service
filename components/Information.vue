@@ -26,6 +26,8 @@
         </v-col>
       </v-row>
       <v-row justify="end" dense no-gutters>
+        <share />
+
         <v-btn
           @click.stop="dialog = true"
           color="purple"
@@ -82,7 +84,6 @@
 
             <v-card-actions>
               <v-spacer />
-
               <v-btn
                 @click="dialog = false"
                 color="green darken-1"
@@ -100,9 +101,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Share from '~/components/Share.vue'
+
 // const axios = require('axios').default
 
 export default {
+  components: {
+    Share
+  },
   data () {
     return {
       dialog: false

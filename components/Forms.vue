@@ -76,9 +76,6 @@
               label="Embed URL (optional)"
             />
           </v-col>
-          <v-col class="d-flex" cols="12" sm="6">
-            <share />
-          </v-col>
         </v-row>
       </v-form>
     </div>
@@ -89,7 +86,6 @@
 import { mapActions, mapGetters } from 'vuex'
 
 import IconUrl from '~/components/IconUrl.js'
-import Share from '~/components/Share.vue'
 const axios = require('axios').default
 const Color = require('color')
 
@@ -99,9 +95,6 @@ const colorNames = require('~/assets/cssColorNames.json').colors
 const colorNamesWithStatus = ['none', 'success', 'important', 'critical', 'informational', 'inactive'].concat(colorNames)
 
 export default {
-  components: {
-    Share
-  },
 
   /* eslint-disable no-console */
   data () {

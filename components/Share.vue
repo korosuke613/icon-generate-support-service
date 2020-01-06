@@ -1,31 +1,33 @@
 <template>
   <div>
-    <div v-for="(share, index) in shares" :key="index">
-      <v-btn
-        @click="share.click"
-        :color="share.color"
-        fab
-        dark
-        target="_blank"
-        rel="noopener"
-      >
-        <v-icon v-if="share.icon !== undefined" dark>
-          {{ share.icon }}
-        </v-icon>
-        <div
-          v-else
-          class="line-it-button"
-          data-lang="ja"
-          data-type="share-c"
-          data-ver="3"
-          data-url="https://social-plugins.line.me/ja/how_to_install#lineitbutton"
-          data-color="default"
-          data-size="large"
-          data-count="false"
-          style="display: none;"
-        />
-      </v-btn>
-    </div>
+    <v-row justify="center">
+      <v-col v-for="(share, index) in shares" :key="index" cols="3">
+        <v-btn
+          :color="share.color"
+          @click="share.click"
+          fab
+          dark
+          target="_blank"
+          rel="noopener"
+        >
+          <v-icon v-if="share.icon !== undefined" dark>
+            {{ share.icon }}
+          </v-icon>
+          <div
+            v-else
+            class="line-it-button"
+            data-lang="ja"
+            data-type="share-c"
+            data-ver="3"
+            data-url="https://social-plugins.line.me/ja/how_to_install#lineitbutton"
+            data-color="default"
+            data-size="large"
+            data-count="false"
+            style="display: none;"
+          />
+        </v-btn>
+      </v-col>
+    </v-row>
 
     <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer" />
 
@@ -55,7 +57,7 @@ export default {
         { click: this.twitterShare, color: '#1DA1F2', icon: 'mdi-twitter' },
         { click: this.lineShare, color: '#53b535', icon: undefined },
         { click: this.facebookShare, color: '#1877F2', icon: 'mdi-facebook' },
-        { click: 'this.onCopy(); this.snackbar = true', color: 'red', icon: 'mdi-code-tags' }
+        { click: this.onCopy, color: 'red', icon: 'mdi-code-tags' }
       ]
     }
   },
@@ -69,6 +71,7 @@ export default {
   },
   methods: {
     onCopy () {
+      this.snackbar = true
       this.$copyText(this.sharedUrl)
     },
     setTwitterShareUrl () {
