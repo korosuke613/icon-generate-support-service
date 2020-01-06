@@ -63,8 +63,14 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    'nuxt-clipboard2'
+    'nuxt-clipboard2',
+    '@nuxtjs/pwa'
   ],
+  manifest: {
+    name: 'BEENOCKER - Easy Budge Generator',
+    short_name: 'BEENOCKER',
+    lang: 'en'
+  },
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
