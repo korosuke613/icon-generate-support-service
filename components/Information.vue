@@ -3,8 +3,10 @@
     <v-card-title>Information</v-card-title>
 
     <v-card-text>
-      <v-row dense no-gutters>
-        <v-col cols="12">
+      <v-row dense>
+        <v-col
+          cols="10"
+        >
           <v-textarea
             :value="getMarkdown()"
             label="Markdown"
@@ -14,7 +16,20 @@
             onclick="this.select();"
           />
         </v-col>
-        <v-col cols="12">
+        <v-col
+          class="text-center"
+          cols="2"
+        >
+          <v-btn
+            @click="onCopyMarkdown"
+            fav
+            height="115px"
+            color="purple"
+          >
+            <v-icon>far fa-copy</v-icon>
+          </v-btn>
+        </v-col>
+        <v-col cols="10">
           <v-textarea
             :value="getHtml()"
             label="HTML"
@@ -24,6 +39,26 @@
             onclick="this.select();"
           />
         </v-col>
+        <v-col
+          class="text-center"
+          cols="2"
+        >
+          <v-btn
+            @click="onCopyHtml"
+            fav
+            height="115px"
+            color="purple"
+          >
+            <v-icon>far fa-copy</v-icon>
+          </v-btn>
+        </v-col>
+        <v-snackbar
+          v-model="snackbar"
+          :timeout="timeout"
+          color="purple"
+        >
+          Copy {{ message }} to Clipboard!
+        </v-snackbar>
       </v-row>
     </v-card-text>
 
@@ -108,13 +143,25 @@ export default {
   },
   data () {
     return {
-      dialog: false
+      snackbar: false,
+      dialog: false,
+      message: undefined
     }
   },
   computed: {
     ...mapGetters('iconInfo', ['label', 'message', 'url', 'base64', 'sharedUrl', 'embedUrl'])
   },
   methods: {
+    onCopyMarkdown () {
+      this.message = 'Markdown'
+      this.snackbar = true
+      this.$copyText(this.getMarkdown())
+    },
+    onCopyHtml () {
+      this.message = 'Html'
+      this.snackbar = true
+      this.$copyText(this.getHtml())
+    },
     getMarkdown () {
       return `[![${this.label} ${this.message}](${this.url})](${this.embedUrl})`
     },
