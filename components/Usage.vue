@@ -12,6 +12,8 @@
       Sample Badges
     </v-card-title>
     <v-card-text>
+      <a href="?la=Generated%20by&me=Nuxt.js&co=00c58e&st=flat-square&lo=Nuxt.js&lc=none"><img src="https://img.shields.io/static/v1?label=Generated%20by&message=Nuxt.js&color=00C58E&style=flat-square&logo=nuxt.js"></a>
+      <a href="?la=Hosting%20by&me=Firebase&co=fFCa28&st=flat-square&lo=Firebase&lc=none"><img src="https://img.shields.io/static/v1?label=Hosting%20by&message=Firebase&color=FFCA28&style=flat-square&logo=firebase"></a>
       <a href="?la=korosuke613&me=Follow%20Me&co=black&st=flat-square&lo=GitHub&lc=none"><img src="https://img.shields.io/static/v1?label=korosuke613&message=Follow%20Me&color=black&style=flat-square&logo=github"></a>
       <a href="?la=&me=Twitter&co=1DA1F2&st=flat-square&lo=Twitter&lc=white"><img src="https://img.shields.io/static/v1?label=&message=Twitter&color=1DA1F2&style=flat-square&logo=twitter&logoColor=white"></a>
       <a href="?la=&me=Facebook&co=1877F2&st=flat-square&lo=Facebook&lc=white"><img src="https://img.shields.io/static/v1?label=&message=Facebook&color=1877F2&style=flat-square&logo=facebook&logoColor=white"></a>
