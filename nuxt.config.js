@@ -20,6 +20,13 @@ export default {
       { hid: 'og:image', property: 'og:image', content: 'https://storage.googleapis.com/aikon-eaf3a.appspot.com/cards/61d301eca475e5338c86bce5caeec338c51e290a.png?GoogleAccessId=aikon-eaf3a%40appspot.gserviceaccount.com&Expires=1580770321&Signature=Fep2kTFEFn7Sc5EtUpk%2BisAGtltvheYmDHHTvdQF75gJzwba3UIRLtfq%2BUQyg9Q6a5iX%2BtoMWrpoOhyWZGE9FJbAdnHaH84Vqh%2Bkibuc5gqypdLyZL2INK9D2sIZq50WTleRjcXQhozawod%2BDuQHJ5mvWGBSWDx1Ty2l%2FWHi%2BUG826O4bxWqwPMgDpG0foCrq8aLnCn4Q2nUby2OiNrkhA2PWlnhHM1Nvjp86BaC3mp%2FAn8gvLTAXsj3PNVZeVrafeP2bvrejFoPXz%2Fd5Qs2Sf963Iaf6NCJIAfb4DY75pVJX5moWWmW1NeQq9%2F8PRiYoXLJNLxqsFiAHX0nqBWLkw%3D%3D' },
       { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' }
     ],
+    script: [
+      {
+        'data-ad-client': 'ca-pub-7246355771451460',
+        async: true,
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+      }
+    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
