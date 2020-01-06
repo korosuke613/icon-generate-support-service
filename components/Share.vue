@@ -1,63 +1,34 @@
 <template>
   <div>
-    <v-btn
-      @click="twitterShare"
-      fab
-      dark
-      target="_blank"
-      rel="noopener"
-      color="#1DA1F2"
-    >
-      <v-icon dark>
-        mdi-twitter
-      </v-icon>
-    </v-btn>
-    <v-btn
-      @click="lineShare"
-      fab
-      dark
-      target="_blank"
-      rel="noopener"
-      color="#53b535"
-    >
-      <div
-        class="line-it-button"
-        data-lang="ja"
-        data-type="share-c"
-        data-ver="3"
-        data-url="https://social-plugins.line.me/ja/how_to_install#lineitbutton"
-        data-color="default"
-        data-size="large"
-        data-count="false"
-        style="display: none;"
-      />
-    </v-btn>
-    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer" />
-    <v-btn
-      @click="facebookShare"
-      fab
-      dark
-      color="#1877F2"
-      target="_blank"
-      rel="noopener"
-    >
-      <v-icon dark>
-        mdi-facebook
-      </v-icon>
-    </v-btn>
-    <v-btn
-      @click="onCopy(); snackbar = true"
-      fab
-      dark
+    <div v-for="(share, index) in shares" :key="index">
+      <v-btn
+        @click="share.click"
+        :color="share.color"
+        fab
+        dark
+        target="_blank"
+        rel="noopener"
+      >
+        <v-icon v-if="share.icon !== undefined" dark>
+          {{ share.icon }}
+        </v-icon>
+        <div
+          v-else
+          class="line-it-button"
+          data-lang="ja"
+          data-type="share-c"
+          data-ver="3"
+          data-url="https://social-plugins.line.me/ja/how_to_install#lineitbutton"
+          data-color="default"
+          data-size="large"
+          data-count="false"
+          style="display: none;"
+        />
+      </v-btn>
+    </div>
 
-      target="_blank"
-      color="orange"
-      rel="noopener"
-    >
-      <v-icon dark>
-        mdi-code-tags
-      </v-icon>
-    </v-btn>
+    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer" />
+
     <v-snackbar
       v-model="snackbar"
       :timeout="timeout"
@@ -79,7 +50,13 @@ export default {
       facebookShareUrl: '',
       lineShareUrl: '',
       snackbar: false,
-      timeout: 2000
+      timeout: 2000,
+      shares: [
+        { click: this.twitterShare, color: '#1DA1F2', icon: 'mdi-twitter' },
+        { click: this.lineShare, color: '#53b535', icon: undefined },
+        { click: this.facebookShare, color: '#1877F2', icon: 'mdi-facebook' },
+        { click: 'this.onCopy(); this.snackbar = true', color: 'red', icon: 'mdi-code-tags' }
+      ]
     }
   },
   computed: {
