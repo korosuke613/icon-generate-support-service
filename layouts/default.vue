@@ -42,25 +42,14 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-footer
-      :fixed="fixed"
-      :padless="padless"
-      app
-    >
-      <share />
-    </v-footer>
   </v-app>
 </template>
 
 <script>
 /* eslint-disable no-unused-vars */
 import { mapGetters } from 'vuex'
-import Share from '~/components/Share.vue'
 
 export default {
-  components: {
-    Share
-  },
   data () {
     return {
       clipped: false,
