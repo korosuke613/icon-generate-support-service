@@ -124,7 +124,7 @@ export const getters = {
     return state.url.replace('https://img.shields.io', 'https://raster.shields.io')
   },
   sharedUrl (state) {
-    return process.env.baseUrl + '/share' + `/?la=${encodeURI(state.label)}&me=${encodeURI(state.message)}&co=${state.color}&st=${state.style}&lo=${encodeURI(state.logo)}&lc=${state.logoColor}`
+    return process.env.baseUrl + 'share' + `/?la=${encodeURI(state.label)}&me=${encodeURI(state.message)}&co=${state.color}&st=${state.style}&lo=${encodeURI(state.logo)}&lc=${state.logoColor}`
   },
   embedUrl (state) {
     return state.embedUrl
