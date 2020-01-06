@@ -61,7 +61,7 @@
           :timeout="timeout"
           color="purple"
         >
-          Copy {{ message }} to Clipboard!
+          Copy {{ copy_message }} to Clipboard!
         </v-snackbar>
       </v-row>
     </v-card-text>
@@ -149,7 +149,7 @@ export default {
     return {
       snackbar: false,
       dialog: false,
-      message: undefined
+      copy_message: undefined
     }
   },
   computed: {
@@ -157,12 +157,12 @@ export default {
   },
   methods: {
     onCopyMarkdown () {
-      this.message = 'Markdown'
+      this.copy_message = 'Markdown'
       this.snackbar = true
       this.$copyText(this.getMarkdown())
     },
     onCopyHtml () {
-      this.message = 'Html'
+      this.copy_message = 'Html'
       this.snackbar = true
       this.$copyText(this.getHtml())
     },
