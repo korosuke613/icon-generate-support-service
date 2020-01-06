@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="share">
     <v-btn
       v-for="(share, index) in shares"
       :key="index"

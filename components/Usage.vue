@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card id="usage">
     <v-card-title class="headline">
       Usage
     </v-card-title>

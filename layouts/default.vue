@@ -25,15 +25,11 @@
       v-model="drawer"
       absolute
       right
-      width="200"
+      temporary
     >
       <v-list-item>
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg" />
-        </v-list-item-avatar>
-
         <v-list-item-content>
-          <v-list-item-title>John Leider</v-list-item-title>
+          <v-list-item-title>Index</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -71,14 +67,24 @@ export default {
       drawer: false,
       items: [
         {
-          icon: 'mdi-apps',
+          icon: 'mdi-home',
           title: 'Home',
           to: { path: '/' }
         },
         {
+          icon: 'mdi-share',
+          title: 'Share',
+          to: { path: '/', hash: 'share' }
+        },
+        {
+          icon: 'mdi-tooltip-text-outline',
+          title: 'Usage',
+          to: { path: '/', hash: 'usage' }
+        },
+        {
           icon: 'mdi-human-greeting',
-          title: 'Inspire',
-          to: { path: 'inspire' }
+          title: 'Developer',
+          to: { path: 'developer' }
         }
       ],
       title: 'BEENOCKER: easy budge generator'
