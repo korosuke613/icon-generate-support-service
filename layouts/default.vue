@@ -5,19 +5,15 @@
       fixed
       app
     >
-      <nuxt-link :to="top.to">
+      <nuxt-link :to="items[0].to">
         <v-img alt="BEENOCKER - Easy Budge Generator" width="250px" src="/beenocker_logo_detail.svg" />
       </nuxt-link>
       <v-spacer />
       <v-btn
-        @click.stop="fixed = !fixed"
-        @click="getQuery()"
-        v-for="(item, i) in items"
-        :key="i"
-        :to="item.to"
+        @click.stop="drawer = !drawer"
         icon
       >
-        <v-icon>{{ item.icon }}</v-icon>
+        <v-icon>mdi-view-dashboard</v-icon>
       </v-btn>
     </v-app-bar>
     <v-content>
@@ -26,19 +22,38 @@
       </v-container>
     </v-content>
     <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
+      v-model="drawer"
+      absolute
+      right
+      width="200"
     >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
+      <v-list-item>
+        <v-list-item-avatar>
+          <v-img src="https://randomuser.me/api/portraits/men/78.jpg" />
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title>John Leider</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider />
+
+      <v-list dense>
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          @click="getQuery()"
+          :to="item.to"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -54,13 +69,12 @@ export default {
     return {
       clipped: false,
       drawer: false,
-      fixed: false,
-      top: {
-        icon: 'mdi-apps',
-        title: 'Welcome',
-        to: { path: '/' }
-      },
       items: [
+        {
+          icon: 'mdi-apps',
+          title: 'Home',
+          to: { path: '/' }
+        },
         {
           icon: 'mdi-human-greeting',
           title: 'Inspire',
@@ -92,7 +106,6 @@ export default {
       this.items.forEach((it) => {
         it.to.query = tmp
       })
-      this.top.to.query = tmp
     }
   }
 }
