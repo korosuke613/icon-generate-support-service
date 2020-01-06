@@ -1,40 +1,25 @@
 <template>
   <div>
-    <v-row justify="center">
-      <v-col v-for="(share, index) in shares" :key="index" cols="3">
-        <v-btn
-          :color="share.color"
-          @click="share.click"
-          fab
-          dark
-          target="_blank"
-          rel="noopener"
-        >
-          <v-icon v-if="share.icon !== undefined" dark>
-            {{ share.icon }}
-          </v-icon>
-          <div
-            v-else
-            class="line-it-button"
-            data-lang="ja"
-            data-type="share-c"
-            data-ver="3"
-            data-url="https://social-plugins.line.me/ja/how_to_install#lineitbutton"
-            data-color="default"
-            data-size="large"
-            data-count="false"
-            style="display: none;"
-          />
-        </v-btn>
-      </v-col>
-    </v-row>
-
+    <v-btn
+      v-for="(share, index) in shares"
+      :key="index"
+      :color="share.color"
+      @click="share.click"
+      fab
+      dark
+      target="_blank"
+      rel="noopener"
+    >
+      <v-icon dark>
+        {{ share.icon }}
+      </v-icon>
+    </v-btn>
     <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer" />
 
     <v-snackbar
       v-model="snackbar"
       :timeout="timeout"
-      color="orange"
+      color="purple"
     >
       Copy to Clipboard!
     </v-snackbar>
@@ -54,10 +39,10 @@ export default {
       snackbar: false,
       timeout: 2000,
       shares: [
-        { click: this.twitterShare, color: '#1DA1F2', icon: 'mdi-twitter' },
-        { click: this.lineShare, color: '#53b535', icon: undefined },
-        { click: this.facebookShare, color: '#1877F2', icon: 'mdi-facebook' },
-        { click: this.onCopy, color: 'red', icon: 'mdi-code-tags' }
+        { click: this.twitterShare, color: '#1DA1F2', icon: 'fab fa-twitter' },
+        { click: this.lineShare, color: '#53b535', icon: 'fab fa-line' },
+        { click: this.facebookShare, color: '#1877F2', icon: 'fab fa-facebook' },
+        { click: this.onCopy, color: 'purple', icon: 'fas fa-code' }
       ]
     }
   },

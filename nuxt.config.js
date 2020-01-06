@@ -47,7 +47,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/firebase', mode: 'client' }
+    { src: '~/plugins/firebase', mode: 'client' },
+    'plugins/vuetify'
   ],
   /*
   ** Nuxt.js dev-modules
