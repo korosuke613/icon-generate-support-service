@@ -5,7 +5,8 @@
     <v-card-text>
       <v-row dense>
         <v-col
-          cols="10"
+          cols="9"
+          lg="10"
         >
           <v-textarea
             :value="getMarkdown()"
@@ -29,7 +30,10 @@
             <v-icon>far fa-copy</v-icon>
           </v-btn>
         </v-col>
-        <v-col cols="10">
+        <v-col
+          cols="9"
+          lg="10"
+        >
           <v-textarea
             :value="getHtml()"
             label="HTML"
