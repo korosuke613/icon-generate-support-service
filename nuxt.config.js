@@ -64,8 +64,13 @@ export default {
   */
   modules: [
     'nuxt-clipboard2',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/sitemap'
   ],
+  sitemap: {
+    hostname: 'https://beenocker.tech',
+    exclude: []
+  },
   manifest: {
     name: 'BEENOCKER - Easy Budge Generator',
     short_name: 'BEENOCKER',
