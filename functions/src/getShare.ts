@@ -26,7 +26,8 @@ module.exports = functions
     if (
       !userAgent.includes("twitterbot") &&
       !userAgent.includes("facebook") &&
-      !userAgent.includes("hatena") 
+      !userAgent.includes("hatena") &&
+      !userAgent.includes("slackbot")
       //!userAgent.includes("curl")
     ) {
       response.redirect(301, common.getTransRedirectUrl(baseRedirectUrl, params));
