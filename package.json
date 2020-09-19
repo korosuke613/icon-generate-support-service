@@ -23,7 +23,7 @@
     "firebase": "^7.21.0",
     "nuxt": "^2.0.0",
     "nuxt-clipboard2": "^0.2.1",
-    "vuexfire": "^3.2.0-alpha.0"
+    "vuexfire": "^3.2.4"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
